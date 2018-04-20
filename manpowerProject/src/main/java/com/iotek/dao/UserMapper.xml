@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="com.iotek.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="User" >
+    <id column="U_ID" property="uId" jdbcType="DECIMAL" />
+    <result column="U_NAME" property="uName" jdbcType="VARCHAR" />
+    <result column="U_PASS" property="uPass" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    U_ID, U_NAME, U_PASS
+  </sql>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="User" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER
+    where U_NAME = #{uName,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByNamePass" resultMap="BaseResultMap" resultType="User">
+    select
+    <include refid="Base_Column_List" />
+    from T_USER
+    where U_NAME = #{uName,jdbcType=DECIMAL} AND U_PASS=#{uPass,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByID" parameterType="User" >
+    delete from T_USER
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addUser"  parameterType="com.iotek.model.User" >
+    insert into T_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        U_ID,
+      </if>
+      <if test="uName != null" >
+        U_NAME,
+      </if>
+      <if test="uPass != null" >
+        U_PASS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=DECIMAL},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPass != null" >
+        #{uPass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByID" parameterType="User" >
+    update T_USER
+    <set >
+      <if test="uName != null" >
+        U_NAME = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPass != null" >
+        U_PASS = #{uPass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where U_ID = #{uId,jdbcType=DECIMAL}
+  </update>
+</mapper>
