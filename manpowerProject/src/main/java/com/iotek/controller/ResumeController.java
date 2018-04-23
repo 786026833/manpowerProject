@@ -3,6 +3,7 @@ package com.iotek.controller;
 import com.iotek.biz.ResumeService;
 import com.iotek.dao.ResumeMapper;
 import com.iotek.model.Resume;
+import com.iotek.model.ResumeDd;
 import com.iotek.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,16 +38,28 @@ public class ResumeController {
                 return "resume";
             }
     }
+    @RequestMapping("/deleteResume1")
+    public void deleteResume1(long resumeRId, HttpServletRequest request, HttpSession session, HttpServletResponse response){
+        response.setContentType("text/html;charset=utf-8");
+        try {
+            response.getWriter().write("<script language='javascript'>if(confirm('是否删除此简历'))" +
+                    "{window.location.href='deleteResume?resumeRId="+resumeRId+"'}else{window.location.href='skipWelcome'}</script>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @RequestMapping("/deleteResume")
     public String deleteResume(long resumeRId, HttpServletRequest request, HttpSession session, HttpServletResponse response){
           Resume resume=new Resume(resumeRId);
-          resume.setUser((User) session.getAttribute("user"));
+          User user=(User)session.getAttribute("user");
+          resume.setuId(user.getuId());
         if (resumeService.deleteResumeByID(resume)!=0){
             session.setAttribute("resume",resumeService.selectResume(resume));
             return "welcome";
         }else{
             try {
-                response.getWriter().write("<script language='javascript'>alert(decodeURIComponent('删除失败'))</script>");
+                response.getWriter().write("<script language='javascript'>if(confirm('是否删除此简历'))" +
+                        "{window.load.href=''}else{window.load.href=''}alert(decodeURIComponent('删除失败'))</script>");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -66,5 +79,12 @@ public class ResumeController {
             }
             return "resume";//操作失败跳转的网页
         }
+    }
+    @RequestMapping("/selectResume")
+    public String selectResume(Resume resume, ResumeDd resumeDd,HttpServletRequest request, HttpSession session, HttpServletResponse response){
+        session.setAttribute("oneResume",resumeService.selectOneResume(resume));
+        System.out.println(resumeService.selectOneResume(resume).toString());
+        session.setAttribute("resumeDd",resumeDd);
+        return "resume1";
     }
 }

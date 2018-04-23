@@ -10,12 +10,13 @@
     <result column="R_EDUCATION" property="rEducation" jdbcType="VARCHAR" />
     <result column="R_WORK_EXPERIENCE" property="rWorkExperience" jdbcType="VARCHAR" />
     <result column="R_CAREER_OBJECTIVE" property="rCareerObjective" jdbcType="VARCHAR" />
-    <association property="user" javaType="User">
+    <result column="U_ID" property="uId" jdbcType="DECIMAL"/>
+   <!-- <association property="user" javaType="User">
       <id column="U_ID" property="uId"/>
       <result column="U_NAME" property="uName"/>
       <result column="U_PASS" property="uPass"/>
 
-    </association>
+    </association>-->
   </resultMap>
   <sql id="Base_Column_List" >
     R_ID, R_NAME, R_SEX, R_PHONE, R_AGE, R_EDUCATION, R_WORK_EXPERIENCE, R_CAREER_OBJECTIVE,
@@ -25,6 +26,11 @@
     select 
     <include refid="Base_Column_List" />
     from T_RESUME WHERE U_ID= #{user.uId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectOneResume" resultMap="BaseResultMap"  resultType="com.iotek.model.Resume">
+    select
+    <include refid="Base_Column_List" />
+    from T_RESUME WHERE R_ID = #{rId,}
   </select>
   <delete id="deleteResumeByID" parameterType="Resume" >
     delete from T_RESUME

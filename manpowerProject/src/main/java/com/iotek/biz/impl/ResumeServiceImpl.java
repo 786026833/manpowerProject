@@ -35,4 +35,8 @@ public class ResumeServiceImpl implements ResumeService {
     public int updateResumeByID(Resume resume) {
         return resumeMapper.updateResumeByID(resume);
     }
+    @Override
+    public Resume selectOneResume(Resume resume) {
+        return resumeMapper.selectOneResume(resume);
+    }
 }

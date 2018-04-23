@@ -30,7 +30,7 @@
             <input type="reset" value="重置">
         </form>
     </c:if>
-        <a href="deleteResume?&resumeRId=${sessionScope.resume1.rId}">删除此简历</a>
+        <a href="deleteResume1?resumeRId=${sessionScope.resume1.rId}">删除此简历</a>
         <a href="skipWelcome">返回</a>
 </div>
 </body>

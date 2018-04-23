@@ -8,7 +8,7 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
-    <style>
+    <style type="text/css">
         p{
             cursor: pointer;
             display: inline-block;
@@ -36,48 +36,38 @@
             display: none;
         }
     </style>
-
 </head>
 <body>
 <div id="queryDiv">
     <span>${sessionScope.succeed}</span>
-    <h2>招聘信息</h2>
+
     <table>
         <tr>
-            <th>标题</th>
-            <th>详细信息</th>
-            <th>发布时间</th>
-            <th>投递简历</th>
+            <th>信息ID</th>
+            <th>简历编号</th>
+            <th>简历投递时间</th>
+            <th>查阅</th>
         </tr>
-        <c:forEach var="rInf" items="${sessionScope.recruitmentInformations}">
+        <c:if test="${empty sessionScope.resumeDds}">
+            <span>暂时没收到简历</span>
+        </c:if>
+        <c:forEach var="resumeDd" items="${sessionScope.resumeDds}">
             <tr>
-                <td>${rInf.recTitle}</td>
-                <td>${rInf.recContent}</td>
-                <td>${rInf.recTime}</td>
-                <td><p id="p1">投递简历</p>
-                <div id="div2">
-                    <c:forEach var="resume" items="${sessionScope.resume}">
-                        简历编号：<a href="addResumeDd?permission=1&rId=${resume.rId}">${resume.rId}</a><br>
-                    </c:forEach>
-                </div>
-                </td>
+                <td>${resumeDd.rdId}</td>
+                <td>${resumeDd.rId}</td>
+                <td>${resumeDd.rdTime}</td>
+                <td>${resumeDd.rdState}</td>
+                <td><a href="selectResume?rId=${resumeDd.rId}&rdId=${resumeDd.rdId}">查阅</a></td>
+                <td><a href="deleteResumeDd?rdId=${resumeDd.rdId}">删除</a></td>
+            </tr>
         </c:forEach>
     </table>
-    <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
+   <%-- 分页
+   <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
         <a href="selectInformation?currentPage=${num}&power=1">${num}</a>
     </c:forEach>
-    <a href="skipWelcome">返回</a>
+    --%>
+    <a href="skipRecruit">返回</a>
 </div>
-
-
-
-<%--分也查询没做出来  原因; 穿的参数是对的 查询语句再后台页能查出来
-   但是在网页中 得不到结果
---%>
-<script>
-    document.getElementById("p1").onclick=function () {
-        document.getElementById("div2").style.display="block";
-    }
-</script>
 </body>
 </html>

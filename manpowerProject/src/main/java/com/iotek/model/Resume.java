@@ -19,7 +19,7 @@ public class Resume implements Serializable{
 
     private String rCareerObjective;
 
-    private User user;
+    private long uId;
 
     public Resume(Long rId) {
         this.rId = rId;
@@ -92,12 +92,13 @@ public class Resume implements Serializable{
         this.rCareerObjective = rCareerObjective == null ? null : rCareerObjective.trim();
     }
 
-    public User getUser() {
-        return user;
+
+    public long getuId() {
+        return uId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setuId(long uId) {
+        this.uId = uId;
     }
 
     @Override

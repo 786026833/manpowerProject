@@ -8,7 +8,7 @@
         <result column="REC_TIME" property="recTime" jdbcType="TIMESTAMP" />
     </resultMap>
     <sql id="Base_Column_List" >
-        REC_ID, REC_TITLE, REC_CONTENT, TO_CHAR(REC_TIME,'YYYY-MM-DD HH24:MI:SS')
+        REC_ID, REC_TITLE, REC_CONTENT, REC_TIME
     </sql>
     <select id="selectByID" resultMap="BaseResultMap" parameterType="RecruitmentInformation" >
         select

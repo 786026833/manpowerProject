@@ -12,4 +12,5 @@ public interface ResumeService {
     int addResume(Resume resume);
     List<Resume> selectResume(Resume resume);
     int updateResumeByID(Resume resume);
+    Resume selectOneResume(Resume resume);
 }

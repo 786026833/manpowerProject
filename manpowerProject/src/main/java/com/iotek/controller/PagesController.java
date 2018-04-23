@@ -14,9 +14,12 @@ import java.util.List;
 @Controller
 public class PagesController {
     @RequestMapping("/skipLogin")
-    public String skipLogin(){
-        return "login";
-
+    public String skipLogin(String myselect ){
+        if (myselect.equals("opt1")) {
+            return "login";
+        }else{
+            return "administrator";
+        }
     }
     @RequestMapping("/skipWelcome")
     public String skipWelcome(){
@@ -50,5 +53,17 @@ public class PagesController {
             }
             return "queryResume";
         }
+    }
+    @RequestMapping("/skipAdministratorPages")
+    public String skipAdministratorPages(){
+        return "administratorpages";
+    }
+    @RequestMapping("/skipRecruit")
+    public String skipRecruit(){
+        return "recruit";
+    }
+    @RequestMapping("/skipResumeDd")
+    public String skipResumeDd(){
+        return "resumeDd";
     }
 }

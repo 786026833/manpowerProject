@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -21,7 +22,13 @@
     <a href="skipQueryResume?permission=2&resume=0">查看简历</a><br>
     <a href="permission=2">查看面试邀请</a><br>
     <a href="skipUserRegister">注册账号</a>
-    <a href="skipLogin">登陆</a>
+    <form action="skipLogin" method="post">
+        <select name="myselect" id="myselect">
+            <option value="opt1">用户</option>
+            <option value="opt2">管理员</option>
+        </select>
+        <input type="submit" value="登陆"/>
+    </form>
 </div>
 <div>
     <p>${error2}</p>

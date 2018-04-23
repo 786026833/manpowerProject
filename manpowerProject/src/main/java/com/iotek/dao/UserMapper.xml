@@ -25,12 +25,15 @@
     from T_USER
     where U_NAME = #{uName,jdbcType=DECIMAL}
   </select>
-
+<!--  select tu.*,tr.*
+  from T_USER tu,T_RESUME tr
+  where U_NAME= #{uName,jdbcType=DECIMAL} AND U_PASS=#{uPass,jdbcType=DECIMAL}
+  and tu.U_ID=tr.U_ID-->
   <select id="selectByNamePass" resultMap="BaseResultMap" parameterType="User">
-    select tu.*,tr.*
-    from T_USER tu,T_RESUME tr
+    select *
+    from T_USER
     where U_NAME= #{uName,jdbcType=DECIMAL} AND U_PASS=#{uPass,jdbcType=DECIMAL}
-    and tu.U_ID=tr.U_ID
+
   </select>
   <select id="selectByID" resultMap="BaseResultMap" parameterType="User">
     select TU.*,TR.*
