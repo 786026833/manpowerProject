@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.ResumeDdMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.ResumeDd" >
+    <id column="RD_ID" property="rdId" jdbcType="DECIMAL" />
+    <result column="R_ID" property="rId" jdbcType="DECIMAL" />
+    <result column="RD_TIME" property="rdTime" jdbcType="TIMESTAMP" />
+    <result column="RD_STATE" property="rdState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RD_ID, R_ID, RD_TIME, RD_STATE
+  </sql>
+  <select id="selectAllResumeDd" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from T_RESUME_DD
+  </select>
+  <delete id="deleteByID" parameterType="ResumeDd" >
+    delete from T_RESUME_DD
+    where RD_ID = #{rdId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addResumeDd" parameterType="com.iotek.model.ResumeDd" >
+    insert into T_RESUME_DD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rdId != null" >
+        RD_ID,
+      </if>
+      <if test="rId != null" >
+        R_ID,
+      </if>
+      <if test="rdTime != null" >
+        RD_TIME,
+      </if>
+      <if test="rdState != null" >
+        RD_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rdId != null" >
+        #{rdId,jdbcType=DECIMAL},
+      </if>
+      <if test="rId != null" >
+        #{rId,jdbcType=DECIMAL},
+      </if>
+      <if test="rdTime != null" >
+        #{rdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rdState != null" >
+        #{rdState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByID" parameterType="com.iotek.model.ResumeDd" >
+    update T_RESUME_DD
+    <set >
+      <if test="rId != null" >
+        R_ID = #{rId,jdbcType=DECIMAL},
+      </if>
+      <if test="rdTime != null" >
+        RD_TIME = #{rdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rdState != null" >
+        RD_STATE = #{rdState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RD_ID = #{rdId,jdbcType=DECIMAL}
+  </update>
+</mapper>

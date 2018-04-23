@@ -7,5 +7,6 @@ public interface UserMapper {
     int addUser(User user);
     User selectByName(User user);
     User selectByNamePass(User user);
+    User selectByID(User user);
     int updateByID(User user);
 }

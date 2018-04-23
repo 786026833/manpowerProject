@@ -17,9 +17,11 @@
 <fieldset>
     <legend>用户登录</legend>
     <form action="login" method="post">
-        账号：<input name="name"><br>
-        密码：<input name="pass"><br>
-        <input type="submit" value="登录">
+        用户名：<input type="text" name="uName" placeholder="请输入用户名" required="required"><br>
+        密　码：<input type="password" name="uPass" placeholder="请输入密码" required="required"><br>
+        记住密码：<input type="checkbox" name="auto" value="auto"><br>
+        <input type="submit" value="登录"> <a href="autoLogin" style="text-decoration:none;
+            display: inline-block;margin-left: 50px;border: 1px solid black;background-color: darkgrey">自动登录</a>
     </form>
     <h4 style="color: red">${error}</h4>
 </fieldset>

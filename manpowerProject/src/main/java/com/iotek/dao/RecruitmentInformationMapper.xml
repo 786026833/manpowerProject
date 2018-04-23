@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.RecruitmentInformationMapper">
+    <resultMap id="BaseResultMap" type="com.iotek.model.RecruitmentInformation" >
+        <id column="REC_ID" property="recId" jdbcType="DECIMAL" />
+        <result column="REC_TITLE" property="recTitle" jdbcType="VARCHAR" />
+        <result column="REC_CONTENT" property="recContent" jdbcType="VARCHAR" />
+        <result column="REC_TIME" property="recTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        REC_ID, REC_TITLE, REC_CONTENT, TO_CHAR(REC_TIME,'YYYY-MM-DD HH24:MI:SS')
+    </sql>
+    <select id="selectByID" resultMap="BaseResultMap" parameterType="RecruitmentInformation" >
+        select
+        <include refid="Base_Column_List" />
+        from T_RECRUITMENT_INFORMATION
+        where REC_ID = #{recId,jdbcType=DECIMAL}
+    </select>
+    <select id="selectALLInformation" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from T_RECRUITMENT_INFORMATION
+    </select>
+    <select id="selectInformation" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM (SELECT tr.* ,rownum rn FROM T_RECRUITMENT_INFORMATION tr)R
+        WHERE R.rn BETWEEN ((currentPage-1)*PAGESIZE+1) AND currentPage*PAGESIZE;
+    </select>
+    <delete id="deleteByID" parameterType="RecruitmentInformation" >
+        delete from T_RECRUITMENT_INFORMATION
+        where REC_ID = #{recId,jdbcType=DECIMAL}
+    </delete>
+    <insert id="addRecruitmentInformation" parameterType="com.iotek.model.RecruitmentInformation" >
+        insert into T_RECRUITMENT_INFORMATION
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="recId != null" >
+                REC_ID,
+            </if>
+            <if test="recTitle != null" >
+                REC_TITLE,
+            </if>
+            <if test="recContent != null" >
+                REC_CONTENT,
+            </if>
+            <if test="recTime != null" >
+                REC_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="recId != null" >
+                #{recId,jdbcType=DECIMAL},
+            </if>
+            <if test="recTitle != null" >
+                #{recTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="recContent != null" >
+                #{recContent,jdbcType=VARCHAR},
+            </if>
+            <if test="recTime != null" >
+                #{to_da,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByID" parameterType="com.iotek.model.RecruitmentInformation" >
+        update T_RECRUITMENT_INFORMATION
+        <set >
+            <if test="recTitle != null" >
+                REC_TITLE = #{recTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="recContent != null" >
+                REC_CONTENT = #{recContent,jdbcType=VARCHAR},
+            </if>
+            <if test="recTime != null" >
+                REC_TIME = #{recTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where REC_ID = #{recId,jdbcType=DECIMAL}
+    </update>
+</mapper>

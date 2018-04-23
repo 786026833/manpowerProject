@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.ResumeMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Resume" >
+    <id column="R_ID" property="rId" jdbcType="DECIMAL" />
+    <result column="R_NAME" property="rName" jdbcType="VARCHAR" />
+    <result column="R_SEX" property="rSex" jdbcType="VARCHAR" />
+    <result column="R_PHONE" property="rPhone" jdbcType="VARCHAR" />
+    <result column="R_AGE" property="rAge" jdbcType="VARCHAR" />
+    <result column="R_EDUCATION" property="rEducation" jdbcType="VARCHAR" />
+    <result column="R_WORK_EXPERIENCE" property="rWorkExperience" jdbcType="VARCHAR" />
+    <result column="R_CAREER_OBJECTIVE" property="rCareerObjective" jdbcType="VARCHAR" />
+    <association property="user" javaType="User">
+      <id column="U_ID" property="uId"/>
+      <result column="U_NAME" property="uName"/>
+      <result column="U_PASS" property="uPass"/>
+
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    R_ID, R_NAME, R_SEX, R_PHONE, R_AGE, R_EDUCATION, R_WORK_EXPERIENCE, R_CAREER_OBJECTIVE,
+    U_ID
+  </sql>
+  <select id="selectResume" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from T_RESUME WHERE U_ID= #{user.uId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteResumeByID" parameterType="Resume" >
+    delete from T_RESUME
+    where R_ID = #{rId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addResume" parameterType="com.iotek.model.Resume" >
+    insert into T_RESUME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        R_ID,
+      </if>
+      <if test="rName != null" >
+        R_NAME,
+      </if>
+      <if test="rSex != null" >
+        R_SEX,
+      </if>
+      <if test="rPhone != null" >
+        R_PHONE,
+      </if>
+      <if test="rAge != null" >
+        R_AGE,
+      </if>
+      <if test="rEducation != null" >
+        R_EDUCATION,
+      </if>
+      <if test="rWorkExperience != null" >
+        R_WORK_EXPERIENCE,
+      </if>
+      <if test="rCareerObjective != null" >
+        R_CAREER_OBJECTIVE,
+      </if>
+      <if test="user != null" >
+        U_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        #{rId,jdbcType=DECIMAL},
+      </if>
+      <if test="rName != null" >
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rSex != null" >
+        #{rSex,jdbcType=VARCHAR},
+      </if>
+      <if test="rPhone != null" >
+        #{rPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="rAge != null" >
+        #{rAge,jdbcType=VARCHAR},
+      </if>
+      <if test="rEducation != null" >
+        #{rEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="rWorkExperience != null" >
+        #{rWorkExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="rCareerObjective != null" >
+        #{rCareerObjective,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user.uId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateResumeByID"  parameterType="com.iotek.model.Resume" >
+    update T_RESUME
+    set
+        R_NAME = #{rName,jdbcType=VARCHAR},
+        R_SEX = #{rSex,jdbcType=VARCHAR},
+        R_PHONE = #{rPhone,jdbcType=VARCHAR},
+        R_AGE = #{rAge,jdbcType=VARCHAR},
+        R_EDUCATION = #{rEducation,jdbcType=VARCHAR},
+        R_WORK_EXPERIENCE = #{rWorkExperience,jdbcType=VARCHAR},
+        R_CAREER_OBJECTIVE = #{rCareerObjective,jdbcType=VARCHAR}
+    where R_ID = #{rId,jdbcType=DECIMAL}
+  </update>
+  <insert id="addResume1" parameterType="com.iotek.model.Resume" >
+    insert into T_RESUME
+    (R_NAME,R_SEX, R_PHONE, R_AGE, R_EDUCATION, R_WORK_EXPERIENCE,R_CAREER_OBJECTIVE, U_ID)VALUES (#{rName,jdbcType=VARCHAR}, #{rSex,jdbcType=VARCHAR},#{rPhone,jdbcType=VARCHAR},
+    #{rAge,jdbcType=VARCHAR},#{rEducation,jdbcType=VARCHAR},#{rWorkExperience,jdbcType=VARCHAR},
+    #{rCareerObjective,jdbcType=VARCHAR}, #{user.uId,jdbcType=DECIMAL})
+  </insert>
+</mapper>

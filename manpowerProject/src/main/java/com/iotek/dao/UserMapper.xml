@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
   <mapper namespace="com.iotek.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="User" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.User" >
     <id column="U_ID" property="uId" jdbcType="DECIMAL" />
     <result column="U_NAME" property="uName" jdbcType="VARCHAR" />
     <result column="U_PASS" property="uPass" jdbcType="VARCHAR" />
+    <collection property="resumeSet" ofType="Resume">
+      <id column="R_ID" property="rId" jdbcType="DECIMAL" />
+      <result column="R_NAME" property="rName" jdbcType="VARCHAR" />
+      <result column="R_SEX" property="rSex" jdbcType="VARCHAR" />
+      <result column="R_PHONE" property="rPhone" jdbcType="VARCHAR" />
+      <result column="R_AGE" property="rAge" jdbcType="VARCHAR" />
+      <result column="R_EDUCATION" property="rEducation" jdbcType="VARCHAR" />
+      <result column="R_WORK_EXPERIENCE" property="rWorkExperience" jdbcType="VARCHAR" />
+      <result column="R_CAREER_OBJECTIVE" property="rCareerObjective" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     U_ID, U_NAME, U_PASS
   </sql>
   <select id="selectByName" resultMap="BaseResultMap" parameterType="User" >
     select 
-    <include refid="Base_Column_List" />
+    *
     from T_USER
     where U_NAME = #{uName,jdbcType=DECIMAL}
   </select>
-  <select id="selectByNamePass" resultMap="BaseResultMap" resultType="User">
-    select
-    <include refid="Base_Column_List" />
-    from T_USER
-    where U_NAME = #{uName,jdbcType=DECIMAL} AND U_PASS=#{uPass,jdbcType=DECIMAL}
+
+  <select id="selectByNamePass" resultMap="BaseResultMap" parameterType="User">
+    select tu.*,tr.*
+    from T_USER tu,T_RESUME tr
+    where U_NAME= #{uName,jdbcType=DECIMAL} AND U_PASS=#{uPass,jdbcType=DECIMAL}
+    and tu.U_ID=tr.U_ID
+  </select>
+  <select id="selectByID" resultMap="BaseResultMap" parameterType="User">
+    select TU.*,TR.*
+    from T_USER TU,T_RESUME TR
+    where TR.U_ID= TU.U_ID AND TU.U_ID=#{uId,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByID" parameterType="User" >
     delete from T_USER

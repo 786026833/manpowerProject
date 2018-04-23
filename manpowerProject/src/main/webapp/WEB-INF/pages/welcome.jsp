@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -12,16 +13,37 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style type="text/css">
+        #div2{
+            display: none;
+        }
+        #p1{
+            cursor: pointer;
+            display: block;
+
+        }
+    </style>
+    <script src="js/jquery-3.1.0.js"></script>
 </head>
 <body>
 <div>
-    <p>欢迎 <span style="color: green">${sessionScope.user.name}</span> 进入人力资源网站</p>
-    <a href="">招聘信息</a>
-    <a href="">填写简历</a>
-    <a href="">查看简历</a>
-    <a href="">查看面试邀请</a>
-    <a href="">注册账号</a>
-    <a href="">登陆</a>
+    <p>欢迎 <span style="color: green">${sessionScope.user.uName}</span> 进入人力资源网站</p>
+    <a href="selectInformation?currentPage=1">招聘信息</a><br>
+    <a href="skipResume?permission=1">填写简历</a><%--permission访问权限--%>
+    <p id="p1">查看简历</p>
+    <div id="div2">
+        <c:if test="${!empty sessionScope.resume}">
+            <c:forEach var="resume" items="${sessionScope.resume}">
+                简历编号：<a href="skipQueryResume?permission=1&resume=${resume.rId}">${resume.rId}</a><br>
+            </c:forEach>
+        </c:if>
+    </div>
+    <a href="permission=1">查看面试邀请</a>
 </div>
+<script>
+    document.getElementById("p1").onclick=function () {
+        document.getElementById("div2").style.display="block";
+    }
+</script>
 </body>
 </html>

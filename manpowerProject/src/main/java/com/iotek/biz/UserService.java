@@ -11,4 +11,5 @@ public interface UserService {
     User selectByName(User user);
     User selectByNamePass(User user);
     int updateByID(User record);
+    User selectByID(User user);
 }
