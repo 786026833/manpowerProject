@@ -25,7 +25,7 @@
   <select id="selectResume" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />
-    from T_RESUME WHERE U_ID= #{user.uId,jdbcType=DECIMAL}
+    from T_RESUME WHERE U_ID= #{uId,jdbcType=DECIMAL}
   </select>
   <select id="selectOneResume" resultMap="BaseResultMap"  resultType="com.iotek.model.Resume">
     select
@@ -93,7 +93,7 @@
         #{rCareerObjective,jdbcType=VARCHAR},
       </if>
       <if test="user != null" >
-        #{user.uId,jdbcType=DECIMAL},
+        #{uId,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -113,6 +113,6 @@
     insert into T_RESUME
     (R_NAME,R_SEX, R_PHONE, R_AGE, R_EDUCATION, R_WORK_EXPERIENCE,R_CAREER_OBJECTIVE, U_ID)VALUES (#{rName,jdbcType=VARCHAR}, #{rSex,jdbcType=VARCHAR},#{rPhone,jdbcType=VARCHAR},
     #{rAge,jdbcType=VARCHAR},#{rEducation,jdbcType=VARCHAR},#{rWorkExperience,jdbcType=VARCHAR},
-    #{rCareerObjective,jdbcType=VARCHAR}, #{user.uId,jdbcType=DECIMAL})
+    #{rCareerObjective,jdbcType=VARCHAR}, #{uId,jdbcType=DECIMAL})
   </insert>
 </mapper>

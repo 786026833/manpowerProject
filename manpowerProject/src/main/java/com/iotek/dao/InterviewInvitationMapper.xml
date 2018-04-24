@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.InterviewInvitationMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.InterviewInvitation" >
+    <id column="I_ID" property="iId" jdbcType="DECIMAL" />
+    <result column="I_INTERVIEW_TIME" property="iInterviewTime" jdbcType="VARCHAR" />
+    <result column="I_INTERVIEW_SITE" property="iInterviewSite" jdbcType="VARCHAR" />
+    <result column="U_ID" property="uId" jdbcType="DECIMAL" />
+    <result column="R_ID" property="rId" jdbcType="DECIMAL" />
+    <result column="I_STATE" property="iState" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_ID, I_INTERVIEW_TIME, I_INTERVIEW_SITE,U_ID,R_ID,I_STATE
+  </sql>
+  <update id="updateById">
+    UPDATE T_INTERVIEW_INVITATION
+    SET
+    I_STATE = #{iState}
+    where I_ID= #{iId}
+
+  </update>
+  <select id="selectAllInterviewInvitation" resultMap="BaseResultMap"  parameterType="InterviewInvitation">
+   SELECT *
+   FROM T_INTERVIEW_INVITATION WHERE U_ID = #{uId}
+  </select>
+  <delete id="deleteById" parameterType="InterviewInvitation" >
+    delete from T_INTERVIEW_INVITATION
+    where I_ID = #{iId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addInterviewInvitation" parameterType="com.iotek.model.InterviewInvitation" >
+    insert into T_INTERVIEW_INVITATION
+    (I_INTERVIEW_TIME,I_INTERVIEW_SITE,U_ID, R_ID,I_STATE)
+   values (
+    #{iInterviewTime},#{iInterviewSite},#{uId},#{rId},#{iState})
+  </insert>
+  <insert id="addInterviewInvitation1" parameterType="com.iotek.model.InterviewInvitation" >
+    insert into T_INTERVIEW_INVITATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iId != null" >
+        I_ID,
+      </if>
+      <if test="iInterviewTime != null" >
+        I_INTERVIEW_TIME,
+      </if>
+      <if test="iInterviewSite != null" >
+        I_INTERVIEW_SITE,
+      </if>
+      <if test="uId != null" >
+        U_ID,
+      </if>
+      <if test="rId != null" >
+        R_ID,
+      </if>
+      <if test="iState != null" >
+        I_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iId != null" >
+        #{iId,jdbcType=DECIMAL},
+      </if>
+      <if test="iInterviewTime != null" >
+        #{to_date(iInterviewTime,'YYYY-MM-DD HH24:MI:SS'),jdbcType=VARCHAR},
+      </if>
+      <if test="iInterviewSite != null" >
+        #{iInterviewSite,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=DECIMAL},
+      </if>
+      <if test="rId != null" >
+        #{rId,jdbcType=DECIMAL},
+      </if>
+      <if test="iState != null" >
+        #{iState,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+
+</mapper>

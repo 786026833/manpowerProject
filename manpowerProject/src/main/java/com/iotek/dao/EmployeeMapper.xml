@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Employee" >
+    <id column="E_ID" property="eId" jdbcType="DECIMAL" />
+    <result column="E_NAME" property="eName" jdbcType="VARCHAR" />
+    <result column="E_PASS" property="ePass" jdbcType="VARCHAR" />
+    <result column="E_PHONE" property="ePhone" jdbcType="VARCHAR" />
+    <result column="E_SEX" property="eSex" jdbcType="VARCHAR" />
+    <result column="E_PID" property="eAge" jdbcType="DECIMAL" />
+    <result column="E_EDUCATION" property="ePid" jdbcType="DECIMAL" />
+    <result column="E_STATE" property="eState" jdbcType="VARCHAR" />
+    <result column="E_JOINDATE" property="eJoinDate" jdbcType="TIMESTAMP"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    E_ID, E_NAME, E_PASS, E_PHONE, E_SEX, E_AGE, E_PID, E_STATE,E_JOINDATE
+  </sql>
+  <select id="selectAllEmployee" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from T_EMPLOYEE
+  </select>
+  <delete id="deleteByID" parameterType="Employee" >
+    delete from T_EMPLOYEE
+    where E_ID = #{eId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addEmployee"  parameterType="com.iotek.model.Employee" >
+    insert into T_EMPLOYEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        E_ID,
+      </if>
+      <if test="eName != null" >
+        E_NAME,
+      </if>
+      <if test="ePass != null" >
+        E_PASS,
+      </if>
+      <if test="ePhone != null" >
+        E_PHONE,
+      </if>
+      <if test="eSex != null" >
+        E_SEX,
+      </if>
+      <if test="eAge != null" >
+        E_AGE,
+      </if>
+      <if test="ePid != null" >
+        E_PID,
+      </if>
+      <if test="eState != null" >
+        E_STATE,
+      </if>
+      <if test="eJoinDate != null" >
+        E_JOINDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId,jdbcType=DECIMAL},
+      </if>
+      <if test="eName != null" >
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="ePass != null" >
+        #{ePass,jdbcType=VARCHAR},
+      </if>
+      <if test="ePhone != null" >
+        #{ePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null" >
+        #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eAge != null" >
+        #{eAge,jdbcType=DECIMAL},
+      </if>
+      <if test="ePid != null" >
+        #{ePid,jdbcType=VARCHAR},
+      </if>
+      <if test="eState != null" >
+        #{eState,jdbcType=VARCHAR},
+      </if>
+      <if test="eJoinDate != null" >
+        #{eJoinDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByID" parameterType="com.iotek.model.Employee" >
+    update T_EMPLOYEE
+    <set >
+      <if test="eName != null" >
+        E_NAME = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="ePass != null" >
+        E_PASS = #{ePass,jdbcType=VARCHAR},
+      </if>
+      <if test="ePhone != null" >
+        E_PHONE = #{ePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="eSex != null" >
+        E_SEX = #{eSex,jdbcType=VARCHAR},
+      </if>
+      <if test="eAge != null" >
+        E_AGE = #{eAge,jdbcType=DECIMAL},
+      </if>
+      <if test="ePid != null" >
+        E_PID = #{eEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="eState != null" >
+        E_STATE = #{eState,jdbcType=VARCHAR},
+      </if>
+      <if test="eJoinDate != null" >
+        E_JOINDATE = #{eJoinDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where E_ID = #{eId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByID1" parameterType="com.iotek.model.Employee" >
+    update T_EMPLOYEE
+    set E_NAME = #{eName,jdbcType=VARCHAR},
+      E_PASS = #{ePass,jdbcType=VARCHAR},
+      E_PHONE = #{ePhone,jdbcType=VARCHAR},
+      E_SEX = #{eSex,jdbcType=VARCHAR},
+    E_AGE = #{eAge,jdbcType=DECIMAL},
+      E_STATE = #{eState,jdbcType=VARCHAR},
+      E_PID = #{ePid,jdbcType=DECIMAL},
+       E_JOINDATE=#{eJoinDate,jdbcType=TIMESTAMP},
+    where E_ID = #{eId,jdbcType=DECIMAL}
+  </update>
+</mapper>

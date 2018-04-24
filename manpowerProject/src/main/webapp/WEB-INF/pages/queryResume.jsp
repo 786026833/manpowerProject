@@ -25,7 +25,7 @@
             </textarea><br>
             求职意向：<input type="text" name="rCareerObjective"  value="${resume1.rCareerObjective}" ><br>
             <input type="hidden"  name="rId" value="${resume1.rId}">
-            <input type="hidden"  name="user.uId" value="${resume1.user.uId}">
+            <input type="hidden"  name="uId" value="${resume1.uId}">
             <input type="submit" value="确认修改">
             <input type="reset" value="重置">
         </form>

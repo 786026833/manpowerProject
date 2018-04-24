@@ -11,8 +11,8 @@ public class ResumeDd implements Serializable{
     private Date rdTime;
 
     private String rdState;
-
-    public ResumeDd() {
+   private  String rdInterview;
+   public ResumeDd() {
     }
 
     public ResumeDd(Long rId) {
@@ -49,5 +49,13 @@ public class ResumeDd implements Serializable{
 
     public void setRdState(String rdState) {
         this.rdState = rdState == null ? null : rdState.trim();
+    }
+
+    public String getRdInterview() {
+        return rdInterview;
+    }
+
+    public void setRdInterview(String rdInterview) {
+        this.rdInterview = rdInterview;
     }
 }

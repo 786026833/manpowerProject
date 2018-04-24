@@ -1,11 +1,16 @@
 package com.iotek.controller;
 
+import com.iotek.biz.DepartmentService;
+import com.iotek.biz.PositionService;
+import com.iotek.biz.ResumeService;
+
 import com.iotek.model.Resume;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,6 +18,12 @@ import java.util.List;
  */
 @Controller
 public class PagesController {
+    @Autowired
+    private ResumeService resumeService;
+    @Autowired
+    private PositionService positionService;
+    @Autowired
+    private DepartmentService departmentService;
     @RequestMapping("/skipLogin")
     public String skipLogin(String myselect ){
         if (myselect.equals("opt1")) {
@@ -62,8 +73,24 @@ public class PagesController {
     public String skipRecruit(){
         return "recruit";
     }
+    @RequestMapping("/skipAddEmployee")
+    public String skipAddEmployee(Resume resume, HttpServletRequest request, HttpSession session){
+        session.setAttribute("addResume",resumeService.selectOneResume(resume));
+        session.setAttribute("allDepartments",departmentService.selectAllDepartment());
+        session.setAttribute("allPositions",positionService.selectAllPosition());
+        return "addEmployee";
+    }
     @RequestMapping("/skipResumeDd")
     public String skipResumeDd(){
         return "resumeDd";
     }
+    @RequestMapping("/skipAddRecruitmentInfor")
+    public String skipAddRecruitmentInfor(){
+        return "addRecruitmentInfors";
+    }
+    @RequestMapping("/skipAdmRecruitmentInfor")
+    public String skipAdmRecruitmentInfor(){
+        return "admRecruitmentInfor";
+    }
+
 }

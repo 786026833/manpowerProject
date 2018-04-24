@@ -1,6 +1,8 @@
 package com.iotek.controller;
 
+import com.iotek.biz.ResumeDdService;
 import com.iotek.biz.ResumeService;
+import com.iotek.dao.ResumeDdMapper;
 import com.iotek.dao.ResumeMapper;
 import com.iotek.model.Resume;
 import com.iotek.model.ResumeDd;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/21.
@@ -24,6 +27,8 @@ import java.net.URLEncoder;
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private ResumeDdService resumeDdService;
     @RequestMapping("/addResume")
     public String addResume(Resume resume, HttpServletRequest request, HttpSession session, HttpServletResponse response){
             if (resumeService.addResume(resume)!=0){
@@ -82,8 +87,14 @@ public class ResumeController {
     }
     @RequestMapping("/selectResume")
     public String selectResume(Resume resume, ResumeDd resumeDd,HttpServletRequest request, HttpSession session, HttpServletResponse response){
+        List<ResumeDd> resumeDds= (List<ResumeDd>) session.getAttribute("resumeDds");
+        for (ResumeDd r:resumeDds){
+            if (r.getRdId()==resumeDd.getRdId()){
+                r.setRdState("已查看");
+                resumeDdService.updateByID(r);
+            }
+        }
         session.setAttribute("oneResume",resumeService.selectOneResume(resume));
-        System.out.println(resumeService.selectOneResume(resume).toString());
         session.setAttribute("resumeDd",resumeDd);
         return "resume1";
     }

@@ -27,6 +27,7 @@ public class ResumeDdController {
             return "../../index";
         }else{
             resumeDd.setRdState("未读");
+            resumeDd.setRdInterview("未面试");
             resumeDd.setRdTime(new Date());//可能有误
             resumeDdService.addResumeDd(resumeDd);
             session.setAttribute("succeed","简历投递成功");
@@ -35,7 +36,7 @@ public class ResumeDdController {
     }
     @RequestMapping("/selectResumeDd")
     public String selectResumeDd(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
-         session.setAttribute("resumeDds",resumeDdService.selectAllResumeDd());
+        session.setAttribute("resumeDds",resumeDdService.selectAllResumeDd());
         return "resumeDd";
     }
     @RequestMapping("/deleteResumeDd")
@@ -44,5 +45,10 @@ public class ResumeDdController {
         session.setAttribute("resumeDds",resumeDdService.selectAllResumeDd());
         return "resumeDd";
     }
-
+    @RequestMapping("/updateResumeDd")
+    public String updateResumeDd(ResumeDd resumeDd,HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+        resumeDdService.updateByID(resumeDd);
+        session.setAttribute("resumeDds",resumeDdService.selectAllResumeDd());
+        return "resumeDd";
+    }
 }

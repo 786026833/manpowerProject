@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Position" >
+    <id column="P_ID" property="pId" jdbcType="DECIMAL" />
+    <result column="P_NAME" property="pName" jdbcType="VARCHAR" />
+    <result column="P_SALARY" property="pSalary" jdbcType="DECIMAL" />
+    <result column="D_ID" property="dId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    P_ID, P_NAME, P_SALARY, D_ID
+  </sql>
+  <delete id="deleteByID">
+    delete from T_POSITION
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </delete>
+  <select id="selectAllPosition" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+  </select>
+
+   <insert id="addPosition" parameterType="com.iotek.model.Position" >
+    insert into T_POSITION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        P_ID,
+      </if>
+      <if test="pName != null" >
+        P_NAME,
+      </if>
+      <if test="pSalary != null" >
+        P_SALARY,
+      </if>
+      <if test="dId != null" >
+        D_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSalary != null" >
+        #{pSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="dId != null" >
+        #{dId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByID" parameterType="com.iotek.model.Position" >
+    update T_POSITION
+    <set >
+      <if test="pName != null" >
+        P_NAME = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSalary != null" >
+        P_SALARY = #{pSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="dId != null" >
+        D_ID = #{dId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotek.model.Position" >
+    update T_POSITION
+    set P_NAME = #{pName,jdbcType=VARCHAR},
+      P_SALARY = #{pSalary,jdbcType=DECIMAL},
+      D_ID = #{dId,jdbcType=DECIMAL}
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

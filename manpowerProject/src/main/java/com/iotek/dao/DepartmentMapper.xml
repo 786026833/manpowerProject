@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="Department" >
+    <id column="D_ID" property="dId" jdbcType="DECIMAL" />
+    <result column="D_NAME" property="dName" jdbcType="VARCHAR" />
+    <result column="D_TIME" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    D_ID, D_NAME,D_TIME
+  </sql>
+  <select id="selectAllDepartment" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEPARTMENT
+  </select>
+  <delete id="deleteById" parameterType="Department" >
+    delete from T_DEPARTMENT
+    where D_ID = #{dId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="addDepartment" parameterType="Department" >
+    insert into T_DEPARTMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dId != null" >
+        D_ID,
+      </if>
+      <if test="dName != null" >
+        D_NAME,
+      </if>
+      <if test="dTime != null" >
+        D_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dId != null" >
+        #{dId,jdbcType=DECIMAL},
+      </if>
+      <if test="dName != null" >
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.iotek.model.Department" >
+    update T_DEPARTMENT
+    <set >
+      <if test="dName != null" >
+        D_NAME = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dTime != null" >
+        D_TIME = #{dTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where D_ID = #{dId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotek.model.Department" >
+    update T_DEPARTMENT
+    set D_NAME = #{dName,jdbcType=VARCHAR},
+    D_TIME = #{dTime,jdbcType=TIMESTAMP}
+    where D_ID = #{dId,jdbcType=DECIMAL}
+  </update>
+</mapper>

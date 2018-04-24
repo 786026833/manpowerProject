@@ -38,7 +38,7 @@
             </c:forEach>
         </c:if>
     </div>
-    <a href="permission=1">查看面试邀请</a>
+    <a href="selectInterviewInvitation?uId=${sessionScope.user.uId}&permission=1">查看面试邀请</a>
 </div>
 <script>
     document.getElementById("p1").onclick=function () {

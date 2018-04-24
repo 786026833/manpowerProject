@@ -8,7 +8,7 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
-    <style type="text/css">
+    <style>
         p{
             cursor: pointer;
             display: inline-block;
@@ -36,43 +36,41 @@
             display: none;
         }
     </style>
+
 </head>
 <body>
 <div id="queryDiv">
-    <span>${sessionScope.error4}</span>
-    <span>${sessionScope.error3}</span>
+    <h2>招聘信息</h2>
     <table>
         <tr>
-            <th>信息ID</th>
-            <th>简历编号</th>
-            <th>简历投递时间</th>
-            <th>查阅</th>
-            <th>面试</th>
+            <th>标题</th>
+            <th>发布时间</th>
         </tr>
-        <c:if test="${empty sessionScope.resumeDds}">
-            <span>暂时没收到简历</span>
-        </c:if>
-        <c:forEach var="resumeDd" items="${sessionScope.resumeDds}">
+        <c:forEach var="rInf" items="${sessionScope.recruitmentInformations}">
             <tr>
-                <td>${resumeDd.rdId}</td>
-                <td>${resumeDd.rId}</td>
-                <td>${resumeDd.rdTime}</td>
-                <td>${resumeDd.rdState}</td>
-                <td>${resumeDd.rdInterview}</td>
-                <td><a href="selectResume?rId=${resumeDd.rId}&rdId=${resumeDd.rdId}">查阅</a></td>
-                <td><a href="deleteResumeDd?rdId=${resumeDd.rdId}">删除</a></td>
-                <c:if test="${resumeDd.rdInterview.equals('已面试')}">
-                    <td><a href="skipAddEmployee?rId=${resumeDd.rId}">录用</a></td>
-                </c:if>
+                <td><a href="">{rInf.recTitle}</a>$</td>
+                <td>${rInf.recTime}</td>
+                <td><a href="">修改</a></td>
+                <td><a href="">删除</a></td>
             </tr>
         </c:forEach>
     </table>
-   <%-- 分页
-   <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
+
+    <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
         <a href="selectInformation?currentPage=${num}&power=1">${num}</a>
     </c:forEach>
-    --%>
     <a href="skipRecruit">返回</a>
 </div>
+
+
+
+<%--分也查询没做出来  原因; 穿的参数是对的 查询语句再后台页能查出来
+   但是在网页中 得不到结果
+--%>
+<script>
+    document.getElementById("p1").onclick=function () {
+        document.getElementById("div2").style.display="block";
+    }
+</script>
 </body>
 </html>

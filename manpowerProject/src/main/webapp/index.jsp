@@ -20,7 +20,7 @@
     <a href="selectInformation?currentPage=1">招聘信息</a><br>
     <a href="skipResume?permission=2">填写简历</a><br>
     <a href="skipQueryResume?permission=2&resume=0">查看简历</a><br>
-    <a href="permission=2">查看面试邀请</a><br>
+    <a href="selectInterviewInvitation?&permission=2">查看面试邀请</a><br>
     <a href="skipUserRegister">注册账号</a>
     <form action="skipLogin" method="post">
         <select name="myselect" id="myselect">
