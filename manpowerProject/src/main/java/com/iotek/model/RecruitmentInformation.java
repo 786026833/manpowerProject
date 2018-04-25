@@ -50,4 +50,14 @@ public class RecruitmentInformation implements Serializable {
         this.recTime = recTime;
     }
 
+    @Override
+    public String
+    toString() {
+        return "RecruitmentInformation{" +
+                "recId=" + recId +
+                ", recTitle='" + recTitle + '\'' +
+                ", recContent='" + recContent + '\'' +
+                ", recTime=" + recTime +
+                '}';
+    }
 }

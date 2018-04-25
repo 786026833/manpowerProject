@@ -12,4 +12,5 @@ public interface PositionService {
     int addPosition(Position position);
     List<Position> selectAllPosition();
     int updateByID(Position position);
+    Position selectByID(Position position);
 }

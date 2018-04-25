@@ -10,6 +10,10 @@
     <sql id="Base_Column_List" >
         REC_ID, REC_TITLE, REC_CONTENT, REC_TIME
     </sql>
+    <insert id="addRecruitmentInformation">
+        INSERT INTO T_RECRUITMENT_INFORMATION (REC_TITLE, REC_CONTENT, REC_TIME) VALUES
+        (#{recTitle},#{recContent},#{recTime})
+    </insert>
     <select id="selectByID" resultMap="BaseResultMap" parameterType="RecruitmentInformation" >
         select
         <include refid="Base_Column_List" />
@@ -31,37 +35,7 @@
         delete from T_RECRUITMENT_INFORMATION
         where REC_ID = #{recId,jdbcType=DECIMAL}
     </delete>
-    <insert id="addRecruitmentInformation" parameterType="com.iotek.model.RecruitmentInformation" >
-        insert into T_RECRUITMENT_INFORMATION
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="recId != null" >
-                REC_ID,
-            </if>
-            <if test="recTitle != null" >
-                REC_TITLE,
-            </if>
-            <if test="recContent != null" >
-                REC_CONTENT,
-            </if>
-            <if test="recTime != null" >
-                REC_TIME,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="recId != null" >
-                #{recId,jdbcType=DECIMAL},
-            </if>
-            <if test="recTitle != null" >
-                #{recTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="recContent != null" >
-                #{recContent,jdbcType=VARCHAR},
-            </if>
-            <if test="recTime != null" >
-                #{to_da,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
+
     <update id="updateByID" parameterType="com.iotek.model.RecruitmentInformation" >
         update T_RECRUITMENT_INFORMATION
         <set >

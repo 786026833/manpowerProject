@@ -5,7 +5,18 @@
     <id column="P_ID" property="pId" jdbcType="DECIMAL" />
     <result column="P_NAME" property="pName" jdbcType="VARCHAR" />
     <result column="P_SALARY" property="pSalary" jdbcType="DECIMAL" />
-    <result column="D_ID" property="dId" jdbcType="DECIMAL" />
+    <result property="dId" column="D_ID"/>
+    <collection property="employees" ofType="Employee">
+      <id column="E_ID" property="eId" jdbcType="DECIMAL" />
+      <result column="E_NAME" property="eName" jdbcType="VARCHAR" />
+      <result column="E_PASS" property="ePass" jdbcType="VARCHAR" />
+      <result column="E_PHONE" property="ePhone" jdbcType="VARCHAR" />
+      <result column="E_SEX" property="eSex" jdbcType="VARCHAR" />
+      <result column="E_PID" property="eAge" jdbcType="DECIMAL" />
+      <result column="E_EDUCATION" property="ePid" jdbcType="DECIMAL" />
+      <result column="E_STATE" property="eState" jdbcType="VARCHAR" />
+      <result column="E_JOINDATE" property="eJoinDate" jdbcType="TIMESTAMP"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     P_ID, P_NAME, P_SALARY, D_ID
@@ -16,11 +27,18 @@
   </delete>
   <select id="selectAllPosition" resultMap="BaseResultMap"  >
     select 
-    <include refid="Base_Column_List" />
-    from T_POSITION
+    tp.*,te.*
+    from T_POSITION tp LEFT JOIN T_EMPLOYEE te
+    ON tp.P_ID=te.E_PID
+  </select>
+  <select id="selectByID" resultType="com.iotek.model.Position">
+    select
+    tp.*,te.*
+    from T_POSITION tp,T_EMPLOYEE te
+    WHERE tp.P_ID=#{pId} and tp.P_ID=te.E_PID
   </select>
 
-   <insert id="addPosition" parameterType="com.iotek.model.Position" >
+  <insert id="addPosition" parameterType="com.iotek.model.Position" >
     insert into T_POSITION
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pId != null" >

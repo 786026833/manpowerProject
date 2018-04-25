@@ -23,8 +23,8 @@
     <form action="addInformation" method="post">
         标　　题：<input type="text" name="recTitle" required="required"><br>
         信息简述：<br>
-        <textarea name="rWorkExperience" style="width:200px;height:80px;" required="required"></textarea><br>
-        <input type="submit" value="提交">
+        <textarea name="recContent" style="width:200px;height:80px;" required="required"></textarea><br>
+        <input type="submit" value="发布信息">
         <input type="reset" value="重置">
     </form>
     <a href="skipRecruit">返回</a>

@@ -2,6 +2,8 @@ package com.iotek.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Position implements Serializable {
     private Long pId;
@@ -11,6 +13,7 @@ public class Position implements Serializable {
     private BigDecimal pSalary;
 
     private Long dId;
+    private Set<Employee> employees=new HashSet<>();
 
     public Long getpId() {
         return pId;
@@ -42,5 +45,24 @@ public class Position implements Serializable {
 
     public void setdId(Long dId) {
         this.dId = dId;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "pId=" + pId +
+                ", pName='" + pName + '\'' +
+                ", pSalary=" + pSalary +
+                ", dId=" + dId +
+                ", employees=" + employees +
+                '}';
     }
 }

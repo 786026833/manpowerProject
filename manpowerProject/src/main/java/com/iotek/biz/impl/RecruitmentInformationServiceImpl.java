@@ -17,17 +17,17 @@ public class RecruitmentInformationServiceImpl implements RecruitmentInformation
 private RecruitmentInformationMapper rInf;
     @Override
     public int deleteByID(RecruitmentInformation recruitmentInformation) {
-        return 0;
+        return rInf.deleteByID(recruitmentInformation);
     }
 
     @Override
     public int addRecruitmentInformation(RecruitmentInformation recruitmentInformation) {
-        return 0;
+        return rInf.addRecruitmentInformation(recruitmentInformation);
     }
 
     @Override
     public RecruitmentInformation selectByID(RecruitmentInformation recruitmentInformation) {
-        return null;
+        return rInf.selectByID(recruitmentInformation);
     }
 
     @Override
@@ -42,6 +42,6 @@ private RecruitmentInformationMapper rInf;
 
     @Override
     public int updateByID(RecruitmentInformation recruitmentInformation) {
-        return 0;
+        return rInf.updateByID(recruitmentInformation);
     }
 }

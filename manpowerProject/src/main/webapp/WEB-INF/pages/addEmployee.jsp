@@ -25,15 +25,21 @@
                 var frag=document.createDocumentFragment();
                 <c:if test="${!empty sessionScope.allPositions}">
                     <c:forEach items="${sessionScope.allPositions}" var="positions">
-                      if(did.value==${positions.dId}){
+                          <c:if test="${positions.dId==did}">
+                                var option=document.createElement("option");
+                                option.innerHTML=${positions.pName};
+                                option.value=${positions.pId};
+                                frag.append(option);
+                          </c:if>
+              <%--  if(did==${positions.dId}){
                           //创建option来存储遍历的对象的name和value
                           var option=document.createElement("option");
                           option.innerHTML=${positions.pName};
                           option.value=${positions.pId};
                           // 将创建的option存储到节点片段中
                           frag.append(option);
-                      }
-                    </c:forEach>
+                      }--%>
+                     </c:forEach>
                 </c:if>
                 pos.append(frag);
             }
@@ -51,7 +57,7 @@
            年　　龄：<input type="text" name="eAge" value="${sessionScope.addResume.rAge}"><br>
            在职状态：<input type="text" name="eState" value="试用期"><br>
            职位选择：
-           部门：<select name="T_DEPARTMENT"  onchange="select_change(this)">
+           部门：<select name="T_DEPARTMENT"  onchange="select_change(this.valueOf())">
               <c:if test="${!empty sessionScope.allDepartments}">
                <c:forEach items="${sessionScope.allDepartments}" var="departments">
                    <option name="T_DEPARTMENT" value=" ${departments.dId}"> ${departments.dName}</option>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.TrainMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Train" >
+    <id column="T_ID" property="tId" jdbcType="DECIMAL" />
+    <result column="T_TITLE" property="tTitle" jdbcType="VARCHAR" />
+    <result column="T_CONTENT" property="tContent" jdbcType="VARCHAR" />
+    <result column="T_BEGIN_TIME" property="tBeginTime" jdbcType="VARCHAR" />
+    <result column="T_TRAINEE" property="tTrainee" jdbcType="VARCHAR" />
+    <result column="T_END_TIME" property="tEndTime" jdbcType="VARCHAR" />
+    <result column="T_SITE" property="tSite" jdbcType="VARCHAR" />
+    <result column="TR_ID" property="trId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_ID, T_TITLE, T_CONTENT, T_BEGIN_TIME, T_TRAINEE, T_END_TIME, T_SITE, TR_ID
+  </sql>
+  <select id="selectByAllTrain" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_TRAIN
+
+  </select>
+  <delete id="deleteByID" parameterType="Train" >
+    delete from T_TRAIN
+    where T_ID = #{tId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addTrain" parameterType="com.iotek.model.Train" >
+    insert into T_TRAIN (T_TITLE, T_CONTENT,
+      T_BEGIN_TIME, T_TRAINEE, T_END_TIME, 
+      T_SITE, TR_ID)
+    values ( #{tTitle,jdbcType=VARCHAR}, #{tContent,jdbcType=VARCHAR},
+      #{tBeginTime,jdbcType=VARCHAR}, #{tTrainee,jdbcType=VARCHAR}, #{tEndTime,jdbcType=VARCHAR}, 
+      #{tSite,jdbcType=VARCHAR}, #{trId,jdbcType=DECIMAL})
+  </insert>
+
+  <update id="updateByID" parameterType="com.iotek.model.Train" >
+    update T_TRAIN
+    <set >
+      <if test="tTitle != null" >
+        T_TITLE = #{tTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tContent != null" >
+        T_CONTENT = #{tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tBeginTime != null" >
+        T_BEGIN_TIME = #{tBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tTrainee != null" >
+        T_TRAINEE = #{tTrainee,jdbcType=VARCHAR},
+      </if>
+      <if test="tEndTime != null" >
+        T_END_TIME = #{tEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tSite != null" >
+        T_SITE = #{tSite,jdbcType=VARCHAR},
+      </if>
+      <if test="trId != null" >
+        TR_ID = #{trId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where T_ID = #{tId,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

@@ -9,4 +9,5 @@ public interface DepartmentMapper {
     int addDepartment(Department department);
     List<Department> selectAllDepartment();
     int updateById(Department department);
+    Department selectById(Department department);
 }

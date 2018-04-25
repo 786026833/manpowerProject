@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.SalaryMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Salary" >
+    <id column="S_ID" property="sId" jdbcType="DECIMAL" />
+    <result column="S_BASE_SAL" property="sBaseSal" jdbcType="DECIMAL" />
+    <result column="S_PERF_SAL" property="sPerfSal" jdbcType="DECIMAL" />
+    <result column="S_OVER_SAL" property="sOverSal" jdbcType="DECIMAL" />
+    <result column="S_PENALTY_SAL" property="sPenaltySal" jdbcType="DECIMAL" />
+    <result column="S_SOC_SAL" property="sSocSal" jdbcType="DECIMAL" />
+    <result column="S_TOTAL_SAL" property="sTotalSal" jdbcType="DECIMAL" />
+    <result column="E_ID" property="eId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    S_ID, S_BASE_SAL, S_PERF_SAL, S_OVER_SAL, S_PENALTY_SAL, S_SOC_SAL, S_TOTAL_SAL, 
+    E_ID
+  </sql>
+  <select id="selectByID" resultMap="BaseResultMap" parameterType="Salary" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SALARY
+    where S_ID = #{sId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAllSalary" resultType="com.iotek.model.Salary">
+    select
+    <include refid="Base_Column_List" />
+    from T_SALARY
+  </select>
+  <delete id="deleteByID" parameterType="Salary" >
+    delete from T_SALARY
+    where S_ID = #{sId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addSalary" parameterType="com.iotek.model.Salary" >
+    insert into T_SALARY ( S_BASE_SAL, S_PERF_SAL,
+      S_OVER_SAL, S_PENALTY_SAL, S_SOC_SAL, 
+      S_TOTAL_SAL, E_ID)
+    values ( #{sBaseSal,jdbcType=DECIMAL}, #{sPerfSal,jdbcType=DECIMAL},
+      #{sOverSal,jdbcType=DECIMAL}, #{sPenaltySal,jdbcType=DECIMAL}, #{sSocSal,jdbcType=DECIMAL}, 
+      #{sTotalSal,jdbcType=DECIMAL}, #{eId,jdbcType=DECIMAL})
+  </insert>
+
+  <update id="updateByID" parameterType="com.iotek.model.Salary" >
+    update T_SALARY
+    <set >
+      <if test="sBaseSal != null" >
+        S_BASE_SAL = #{sBaseSal,jdbcType=DECIMAL},
+      </if>
+      <if test="sPerfSal != null" >
+        S_PERF_SAL = #{sPerfSal,jdbcType=DECIMAL},
+      </if>
+      <if test="sOverSal != null" >
+        S_OVER_SAL = #{sOverSal,jdbcType=DECIMAL},
+      </if>
+      <if test="sPenaltySal != null" >
+        S_PENALTY_SAL = #{sPenaltySal,jdbcType=DECIMAL},
+      </if>
+      <if test="sSocSal != null" >
+        S_SOC_SAL = #{sSocSal,jdbcType=DECIMAL},
+      </if>
+      <if test="sTotalSal != null" >
+        S_TOTAL_SAL = #{sTotalSal,jdbcType=DECIMAL},
+      </if>
+      <if test="eId != null" >
+        E_ID = #{eId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where S_ID = #{sId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotek.model.Salary" >
+    update T_SALARY
+    set S_BASE_SAL = #{sBaseSal,jdbcType=DECIMAL},
+      S_PERF_SAL = #{sPerfSal,jdbcType=DECIMAL},
+      S_OVER_SAL = #{sOverSal,jdbcType=DECIMAL},
+      S_PENALTY_SAL = #{sPenaltySal,jdbcType=DECIMAL},
+      S_SOC_SAL = #{sSocSal,jdbcType=DECIMAL},
+      S_TOTAL_SAL = #{sTotalSal,jdbcType=DECIMAL},
+      E_ID = #{eId,jdbcType=DECIMAL}
+    where S_ID = #{sId,jdbcType=DECIMAL}
+  </update>
+</mapper>

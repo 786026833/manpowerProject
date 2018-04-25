@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.RewardPunishmentMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.RewardPunishment" >
+    <id column="RP_ID" property="rpId" jdbcType="DECIMAL" />
+    <result column="RP_TIME" property="rpTime" jdbcType="TIMESTAMP" />
+    <result column="RP_CAUSE" property="rpCause" jdbcType="VARCHAR" />
+    <result column="RP_SAL" property="rpSal" jdbcType="DECIMAL" />
+    <result column="E_ID" property="eId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RP_ID, RP_TIME, RP_CAUSE, RP_SAL, E_ID
+  </sql>
+  <select id="selectByID" resultMap="BaseResultMap" parameterType="RewardPunishment" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_REWARD_PUNISHMENT
+    where RP_ID = #{rpId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAllRewardPunishment" resultType="com.iotek.model.RewardPunishment">
+    select
+    <include refid="Base_Column_List" />
+    from T_REWARD_PUNISHMENT
+  </select>
+  <delete id="deleteByID" parameterType="RewardPunishment" >
+    delete from T_REWARD_PUNISHMENT
+    where RP_ID = #{rpId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addRewardPunishment" parameterType="com.iotek.model.RewardPunishment" >
+    insert into T_REWARD_PUNISHMENT ( RP_TIME, RP_CAUSE,
+      RP_SAL, E_ID)
+    values ( #{rpTime,jdbcType=TIMESTAMP}, #{rpCause,jdbcType=VARCHAR},
+      #{rpSal,jdbcType=DECIMAL}, #{eId,jdbcType=DECIMAL})
+  </insert>
+
+  <update id="updateByID" parameterType="com.iotek.model.RewardPunishment" >
+    update T_REWARD_PUNISHMENT
+    <set >
+      <if test="rpTime != null" >
+        RP_TIME = #{rpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rpCause != null" >
+        RP_CAUSE = #{rpCause,jdbcType=VARCHAR},
+      </if>
+      <if test="rpSal != null" >
+        RP_SAL = #{rpSal,jdbcType=DECIMAL},
+      </if>
+      <if test="eId != null" >
+        E_ID = #{eId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where RP_ID = #{rpId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotek.model.RewardPunishment" >
+    update T_REWARD_PUNISHMENT
+    set RP_TIME = #{rpTime,jdbcType=TIMESTAMP},
+      RP_CAUSE = #{rpCause,jdbcType=VARCHAR},
+      RP_SAL = #{rpSal,jdbcType=DECIMAL},
+      E_ID = #{eId,jdbcType=DECIMAL}
+    where RP_ID = #{rpId,jdbcType=DECIMAL}
+  </update>
+</mapper>

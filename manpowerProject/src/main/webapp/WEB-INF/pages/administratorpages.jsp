@@ -18,7 +18,9 @@
 </head>
 <body>
   <div id="div1">
-      <a href="">部门管理</a><br>
+      <a href="skipDepartment">部门管理</a><br>
+      <a href="addD_Position">职位管理</a><br>
+      <a href="">员工管理</a><br>
       <a href="">薪资管理</a><br>
       <a href="">考勤管理</a><br>
       <a href="">培训管理</a><br>

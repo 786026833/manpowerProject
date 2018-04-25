@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.CheckMapper" >
+  <resultMap id="BaseResultMap" type="com.iotek.model.Check" >
+    <id column="C_ID" property="cId" jdbcType="DECIMAL" />
+    <result column="C_WORK_TIME" property="cWorkTime" jdbcType="TIMESTAMP" />
+    <result column="C_OFFWORK_TINE" property="cOffworkTine" jdbcType="TIMESTAMP" />
+    <result column="C_LATE" property="cLate" jdbcType="VARCHAR" />
+    <result column="C_LEAVE" property="cLeave" jdbcType="VARCHAR" />
+    <result column="E_ID" property="eId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    C_ID, C_WORK_TIME, C_OFFWORK_TINE, C_LATE, C_LEAVE, E_ID
+  </sql>
+  <select id="selectAllCheck" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHECK
+  </select>
+  <delete id="deleteByID" parameterType="Check" >
+    delete from T_CHECK
+    where C_ID = #{cId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="addCheck" parameterType="com.iotek.model.Check" >
+    insert into T_CHECK (C_WORK_TIME, C_OFFWORK_TINE,
+      C_LATE, C_LEAVE, E_ID)
+    values (#{cWorkTime,jdbcType=TIMESTAMP}, #{cOffworkTine,jdbcType=TIMESTAMP},
+      #{cLate,jdbcType=VARCHAR}, #{cLeave,jdbcType=VARCHAR}, #{eId,jdbcType=DECIMAL})
+  </insert>
+
+  <update id="updateByID" parameterType="com.iotek.model.Check" >
+    update T_CHECK
+    <set >
+      <if test="cWorkTime != null" >
+        C_WORK_TIME = #{cWorkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cOffworkTine != null" >
+        C_OFFWORK_TINE = #{cOffworkTine,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cLate != null" >
+        C_LATE = #{cLate,jdbcType=VARCHAR},
+      </if>
+      <if test="cLeave != null" >
+        C_LEAVE = #{cLeave,jdbcType=VARCHAR},
+      </if>
+      <if test="eId != null" >
+        E_ID = #{eId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where C_ID = #{cId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iotek.model.Check" >
+    update T_CHECK
+    set C_WORK_TIME = #{cWorkTime,jdbcType=TIMESTAMP},
+      C_OFFWORK_TINE = #{cOffworkTine,jdbcType=TIMESTAMP},
+      C_LATE = #{cLate,jdbcType=VARCHAR},
+      C_LEAVE = #{cLeave,jdbcType=VARCHAR},
+      E_ID = #{eId,jdbcType=DECIMAL}
+    where C_ID = #{cId,jdbcType=DECIMAL}
+  </update>
+</mapper>

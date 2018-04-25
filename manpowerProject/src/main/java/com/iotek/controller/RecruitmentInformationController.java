@@ -56,4 +56,31 @@ public class RecruitmentInformationController {
             return "error";
         }
     }
+    @RequestMapping("/updateInformation")
+    public String updateInformation(RecruitmentInformation recruitmentInformation,
+                                 HttpServletRequest request, HttpSession session){
+        recruitmentInformation.setRecTime(new Date());
+        rIns.updateByID(recruitmentInformation);
+        //session.setAttribute("error","招聘信息发布成功");
+        return "recruit";
+    }
+    @RequestMapping("/deleteInformation")
+    public String deleteInformation(RecruitmentInformation recruitmentInformation,
+                                    HttpServletRequest request, HttpSession session){
+        rIns.deleteByID(recruitmentInformation);
+        //session.setAttribute("error","招聘信息发布成功");
+        return "recruit";
+    }
+    @RequestMapping("/oneInformation")
+    public String oneInformation(RecruitmentInformation recruitmentInformation,
+                                    HttpServletRequest request, HttpSession session){
+        List<RecruitmentInformation> rInf= (List<RecruitmentInformation>) session.getAttribute("informations");
+        for (RecruitmentInformation r: rInf) {
+            if (r.getRecId()==recruitmentInformation.getRecId()){
+
+                session.setAttribute("oneInformations",r);
+            }
+        }
+        return "oneInformations";
+    }
 }

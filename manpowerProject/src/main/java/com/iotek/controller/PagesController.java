@@ -92,5 +92,12 @@ public class PagesController {
     public String skipAdmRecruitmentInfor(){
         return "admRecruitmentInfor";
     }
-
+    @RequestMapping("/skipDepartment")
+    public String skipDepartment(){
+        return "department";
+    }
+    @RequestMapping("/skipPosition")
+    public String skipPosition(){
+        return "position";
+    }
 }

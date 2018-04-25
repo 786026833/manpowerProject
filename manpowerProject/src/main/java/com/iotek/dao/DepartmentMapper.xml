@@ -5,14 +5,24 @@
     <id column="D_ID" property="dId" jdbcType="DECIMAL" />
     <result column="D_NAME" property="dName" jdbcType="VARCHAR" />
     <result column="D_TIME" property="dTime" jdbcType="TIMESTAMP" />
+    <collection property="positions" ofType="Position">
+      <id property="pId" column="P_ID"/>
+      <result property="pName" column="P_NAME"/>
+      <result property="pSalary" column="P_SALARY"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     D_ID, D_NAME,D_TIME
   </sql>
   <select id="selectAllDepartment" resultMap="BaseResultMap"  >
-    select 
-    <include refid="Base_Column_List" />
-    from T_DEPARTMENT
+    select td.*,tp.*
+    from T_DEPARTMENT td LEFT JOIN T_POSITION tp
+    ON  tp.D_ID=td.D_ID
+  </select>
+  <select id="selectById" resultType="com.iotek.model.Department">
+    select td.*,tp.*
+    from T_DEPARTMENT td,T_POSITION tp
+    WHERE tp.D_ID=td.D_ID
   </select>
   <delete id="deleteById" parameterType="Department" >
     delete from T_DEPARTMENT
