@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.iotek.model.ResumeDd" >
     <id column="RD_ID" property="rdId" jdbcType="DECIMAL" />
     <result column="R_ID" property="rId" jdbcType="DECIMAL" />
+    <result column="REC_ID" property="recId" jdbcType="DECIMAL" />
     <result column="RD_TIME" property="rdTime" jdbcType="TIMESTAMP" />
     <result column="RD_STATE" property="rdState" jdbcType="VARCHAR" />
     <result column="RD_INTERVIEW" property="rdInterview" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    RD_ID, R_ID, RD_TIME, RD_STATE,RD_INTERVIEW
+    RD_ID, R_ID, RD_TIME, RD_STATE,RD_INTERVIEW,REC_ID
   </sql>
   <select id="selectAllResumeDd" resultMap="BaseResultMap" >
     select
@@ -29,6 +30,9 @@
       <if test="rId != null" >
         R_ID,
       </if>
+      <if test="recId!= null" >
+        REC_ID,
+      </if>
       <if test="rdTime != null" >
         RD_TIME,
       </if>
@@ -46,6 +50,9 @@
       <if test="rId != null" >
         #{rId,jdbcType=DECIMAL},
       </if>
+      <if test="recId != null" >
+        #{recId,jdbcType=DECIMAL},
+      </if>
       <if test="rdTime != null" >
         #{rdTime,jdbcType=TIMESTAMP},
       </if>
@@ -62,6 +69,9 @@
     <set >
       <if test="rId != null" >
         R_ID = #{rId,jdbcType=DECIMAL},
+      </if>
+      <if test="recId != null" >
+        REC_ID = #{recId,jdbcType=DECIMAL},
       </if>
       <if test="rdTime != null" >
         RD_TIME = #{rdTime,jdbcType=TIMESTAMP},

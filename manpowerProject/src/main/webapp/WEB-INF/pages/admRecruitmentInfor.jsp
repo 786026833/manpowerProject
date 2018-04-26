@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -44,13 +45,28 @@
     <table>
         <tr>
             <th>标题</th>
+            <th>状态（1.发布 0.未发布）</th>
             <th>发布时间</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         <c:forEach var="rInf" items="${sessionScope.informations}">
             <tr>
                 <td><a href="oneInformation?recId=${rInf.recId}">${rInf.recTitle}</a></td>
-                <td>${rInf.recTime}</td>
-                <td><a href="oneInformation?recId=${rInf.recId}">修改</a></td>
+                <td>${rInf.recState}</td>
+                <c:choose>
+                    <c:when test="${rInf.recState==0}">
+                        <td></td>
+                        <td><a href="oneInformation?recId=${rInf.recId}">修改</a></td>
+                        <td><a href="updateInformation?recId=${rInf.recId}&time=1">发布</a></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><fmt:formatDate value="${rInf.recTime}" type="Date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td></td>
+                        <td></td>
+                    </c:otherwise>
+                </c:choose>
                 <td><a href="deleteInformation?recId=${rInf.recId}">删除</a></td>
             </tr>
         </c:forEach>

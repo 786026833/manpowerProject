@@ -65,7 +65,7 @@
         </div>
 
     </div>
-    <span id="span">${sessionScope.error9}</span>
+    <span id="span">${sessionScope.error10}</span>
 
 </div>
 <a href="skipAdministratorPages">返回</a>

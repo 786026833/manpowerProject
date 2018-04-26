@@ -23,7 +23,7 @@
       <a href="">员工管理</a><br>
       <a href="">薪资管理</a><br>
       <a href="">考勤管理</a><br>
-      <a href="">培训管理</a><br>
+      <a href="skipTrain">培训管理</a><br>
       <a href="skipRecruit">招聘管理</a><br>
       <a href="">奖惩信息管理</a><br>
   </div>

@@ -21,11 +21,15 @@
     <form action="updateInformation" method="post">
         <h1>招聘信息</h1>
         标题：<input type="text" name="recTitle" value="${sessionScope.oneInformations.recTitle}"><br>
+        部门：<input type="text" name="dId" value="${sessionScope.oneInformations.dId}"><br>
+        职位：<input type="text" name="pId" value="${sessionScope.oneInformations.pId}"><br>
+        <%--职位部门应显示名字，并且能直接选择，此功能还有待实现--%>
         信息简述：<textarea  name="recContent" style="width:200px;height:80px;" required="required">
             ${sessionScope.oneInformations.recContent}
         </textarea><br>
         <input type="hidden" name="recId" value="${sessionScope.oneInformations.recId}"><br>
-        <input type="submit" value="重新发布">  <a href="deleteInformation?recId=${sessionScope.oneInformations.recId}">删除</a>
+        <input type="hidden" name="time" value="0">
+        <input type="submit" value="修改">  <a href="deleteInformation?recId=${sessionScope.oneInformations.recId}">删除</a>
     </form>
 </div>
 <a href="skipRecruit">返回</a>

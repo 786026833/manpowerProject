@@ -6,13 +6,16 @@
         <result column="REC_TITLE" property="recTitle" jdbcType="VARCHAR" />
         <result column="REC_CONTENT" property="recContent" jdbcType="VARCHAR" />
         <result column="REC_TIME" property="recTime" jdbcType="TIMESTAMP" />
-    </resultMap>
+        <result column="D_ID" property="dId"/>
+        <result column="P_ID" property="pId"/>
+        <result column="REC_STATE" property="recState"/>
+     </resultMap>
     <sql id="Base_Column_List" >
-        REC_ID, REC_TITLE, REC_CONTENT, REC_TIME
+        REC_ID, REC_TITLE, REC_CONTENT, REC_TIME,REC_STATE,D_ID,P_ID
     </sql>
     <insert id="addRecruitmentInformation">
-        INSERT INTO T_RECRUITMENT_INFORMATION (REC_TITLE, REC_CONTENT, REC_TIME) VALUES
-        (#{recTitle},#{recContent},#{recTime})
+        INSERT INTO T_RECRUITMENT_INFORMATION (REC_TITLE, REC_CONTENT,REC_STATE,D_ID,P_ID) VALUES
+        (#{recTitle},#{recContent},#{recState},#{pId},#{dId})
     </insert>
     <select id="selectByID" resultMap="BaseResultMap" parameterType="RecruitmentInformation" >
         select
@@ -47,6 +50,15 @@
             </if>
             <if test="recTime != null" >
                 REC_TIME = #{recTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="recState != null" >
+                REC_STATE = #{recState,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pId != null" >
+                P_ID = #{pId,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dId != null" >
+                D_ID = #{dId,jdbcType=TIMESTAMP},
             </if>
         </set>
         where REC_ID = #{recId,jdbcType=DECIMAL}

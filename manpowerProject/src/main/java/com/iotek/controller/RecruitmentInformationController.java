@@ -1,5 +1,6 @@
 package com.iotek.controller;
 
+import com.iotek.biz.DepartmentService;
 import com.iotek.biz.RecruitmentInformationService;
 import com.iotek.model.RecruitmentInformation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
 public class RecruitmentInformationController {
     @Autowired
     private RecruitmentInformationService rIns;
+    @Autowired
+    private DepartmentService departmentService;
     @RequestMapping("/selectInformation")
     public String selectInformation(int currentPage, HttpServletRequest request, HttpSession session){
         int totalRows=rIns.selectALLInformation().size();//获取记录的总数
@@ -36,9 +39,10 @@ public class RecruitmentInformationController {
     @RequestMapping("/addInformation")
     public String addInformation(RecruitmentInformation recruitmentInformation,
             HttpServletRequest request, HttpSession session){
-        recruitmentInformation.setRecTime(new Date());
+        //recruitmentInformation.setRecTime(new Date());
+        recruitmentInformation.setRecState((long)0);
         rIns.addRecruitmentInformation(recruitmentInformation);
-        session.setAttribute("error","招聘信息发布成功");
+        session.setAttribute("error","招聘信息添加成功");
         return "recruit";
     }
     @RequestMapping("/admSelectInformation")
@@ -57,11 +61,14 @@ public class RecruitmentInformationController {
         }
     }
     @RequestMapping("/updateInformation")
-    public String updateInformation(RecruitmentInformation recruitmentInformation,
+    public String updateInformation(int time,RecruitmentInformation recruitmentInformation,
                                  HttpServletRequest request, HttpSession session){
-        recruitmentInformation.setRecTime(new Date());
+        if (time==1){
+            recruitmentInformation.setRecTime(new Date());
+            recruitmentInformation.setRecState((long)1);
+        }
         rIns.updateByID(recruitmentInformation);
-        //session.setAttribute("error","招聘信息发布成功");
+        //session.setAttribute("error","招聘信息修改成功");
         return "recruit";
     }
     @RequestMapping("/deleteInformation")
@@ -77,10 +84,14 @@ public class RecruitmentInformationController {
         List<RecruitmentInformation> rInf= (List<RecruitmentInformation>) session.getAttribute("informations");
         for (RecruitmentInformation r: rInf) {
             if (r.getRecId()==recruitmentInformation.getRecId()){
-
                 session.setAttribute("oneInformations",r);
             }
         }
         return "oneInformations";
+    }
+    @RequestMapping("/skipAddRecruitmentInfor")
+    public String skipAddRecruitmentInfor(HttpSession session){
+        session.setAttribute("departments",departmentService.selectAllDepartment());
+        return "addRecruitmentInfors";
     }
 }

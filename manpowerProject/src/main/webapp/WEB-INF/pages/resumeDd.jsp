@@ -62,7 +62,7 @@
                 <td><a href="selectResume?rId=${resumeDd.rId}&rdId=${resumeDd.rdId}">查阅</a></td>
                 <td><a href="deleteResumeDd?rdId=${resumeDd.rdId}">删除</a></td>
                 <c:if test="${resumeDd.rdInterview.equals('已面试')}">
-                    <td><a href="skipAddEmployee?rId=${resumeDd.rId}">录用</a></td>
+                    <td><a href="skipAddEmployee?rId=${resumeDd.rId}&recId=${resumeDd.recId}">录用</a></td>
                 </c:if>
             </tr>
         </c:forEach>

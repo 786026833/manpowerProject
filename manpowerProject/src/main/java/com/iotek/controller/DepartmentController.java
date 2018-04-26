@@ -6,6 +6,7 @@ import com.iotek.model.Department;
 import com.iotek.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,16 @@ public class DepartmentController {
         session.setAttribute("departments",departments);
         return "selectDepartment";
     }
+    @RequestMapping("/dep_position")
+    public  String dep_position(Department department, Model model, HttpSession session){
+        List<Department> departments= (List<Department>) session.getAttribute("departments");
+        for (Department d:departments) {
+            if (d.getdId()==department.getdId()){
+                session.setAttribute("positions",d.getPositions());
+            }
+        }
+        return "dep_position";
+    }
     @RequestMapping("/addD_Position")
     public  String  addD_Position( HttpSession session){
         List<Department> departments=departmentService.selectAllDepartment();
@@ -54,7 +65,7 @@ public class DepartmentController {
         List<Position> positions =positionService.selectAllPosition();
         for (Position p:positions) {
             if (p.getdId()==department.getdId()){
-                if (p.getEmployees()!=null){
+                if (p.getEmployees().size()!=0){
                     session.setAttribute("error7","此部门还有员工存在，不能撤销");
                     return selectDepartment(session);
                 }

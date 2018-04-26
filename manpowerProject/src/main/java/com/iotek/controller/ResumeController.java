@@ -63,8 +63,7 @@ public class ResumeController {
             return "welcome";
         }else{
             try {
-                response.getWriter().write("<script language='javascript'>if(confirm('是否删除此简历'))" +
-                        "{window.load.href=''}else{window.load.href=''}alert(decodeURIComponent('删除失败'))</script>");
+                response.getWriter().write("<script language='javascript'>alert(decodeURIComponent('删除失败'))</script>");
             } catch (IOException e) {
                 e.printStackTrace();
             }

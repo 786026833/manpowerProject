@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -45,22 +46,29 @@
     <table>
         <tr>
             <th>标题</th>
+            <%--<th>招聘部门</th>
+            <th>招聘职位</th>--%>
             <th>详细信息</th>
             <th>发布时间</th>
             <th>投递简历</th>
         </tr>
         <c:forEach var="rInf" items="${sessionScope.recruitmentInformations}">
+        <c:if test="${rInf.recState==1}" >
             <tr>
                 <td>${rInf.recTitle}</td>
+                    <%-- <td>${rInf.recTitle}</td>
+                     <td>${rInf.recTitle}</td>--%>
                 <td>${rInf.recContent}</td>
-                <td>${rInf.recTime}</td>
+                <td><fmt:formatDate value="${rInf.recTime}" type="Date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><p id="p1">投递简历</p>
-                <div id="div2">
-                    <c:forEach var="resume" items="${sessionScope.resume}">
-                        简历编号：<a href="addResumeDd?permission=1&rId=${resume.rId}">${resume.rId}</a><br>
-                    </c:forEach>
-                </div>
+                    <div id="div2">
+                        <c:forEach var="resume" items="${sessionScope.resume}">
+                            简历编号：<a href="addResumeDd?permission=1&rId=${resume.rId}&recId=${rInf.recId}">${resume.rId}</a><br>
+                        </c:forEach>
+                    </div>
                 </td>
+            </tr>
+        </c:if>
         </c:forEach>
     </table>
     <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">

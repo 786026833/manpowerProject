@@ -12,7 +12,9 @@
       <result column="E_PASS" property="ePass" jdbcType="VARCHAR" />
       <result column="E_PHONE" property="ePhone" jdbcType="VARCHAR" />
       <result column="E_SEX" property="eSex" jdbcType="VARCHAR" />
-      <result column="E_PID" property="eAge" jdbcType="DECIMAL" />
+      <result column="E_Age" property="eAge" jdbcType="DECIMAL" />
+      <result column="E_PID" property="ePid" jdbcType="DECIMAL" />
+      <result column="E_DID" property="eDid" jdbcType="DECIMAL" />
       <result column="E_EDUCATION" property="ePid" jdbcType="DECIMAL" />
       <result column="E_STATE" property="eState" jdbcType="VARCHAR" />
       <result column="E_JOINDATE" property="eJoinDate" jdbcType="TIMESTAMP"/>
@@ -32,10 +34,10 @@
     ON tp.P_ID=te.E_PID
   </select>
   <select id="selectByID" resultType="com.iotek.model.Position">
-    select
+    SELECT * FROM (select
     tp.*,te.*
-    from T_POSITION tp,T_EMPLOYEE te
-    WHERE tp.P_ID=#{pId} and tp.P_ID=te.E_PID
+    from T_POSITION tp LEFT JOIN T_EMPLOYEE te
+     ON tp.P_ID=te.E_PID ) WHERE P_ID =#{pId}
   </select>
 
   <insert id="addPosition" parameterType="com.iotek.model.Position" >

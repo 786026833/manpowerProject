@@ -7,17 +7,19 @@
     <result column="E_PASS" property="ePass" jdbcType="VARCHAR" />
     <result column="E_PHONE" property="ePhone" jdbcType="VARCHAR" />
     <result column="E_SEX" property="eSex" jdbcType="VARCHAR" />
-    <result column="E_PID" property="eAge" jdbcType="DECIMAL" />
-    <result column="E_EDUCATION" property="ePid" jdbcType="DECIMAL" />
+    <result column="E_PID" property="ePid" jdbcType="DECIMAL" />
+    <result column="E_DID" property="eDid" jdbcType="DECIMAL" />
+    <result column="E_TRAIN" property="eTrain"  />
+    <result column="E_AGE" property="eAge" jdbcType="DECIMAL" />
     <result column="E_STATE" property="eState" jdbcType="VARCHAR" />
     <result column="E_JOINDATE" property="eJoinDate" jdbcType="TIMESTAMP"  />
   </resultMap>
   <sql id="Base_Column_List" >
-    E_ID, E_NAME, E_PASS, E_PHONE, E_SEX, E_AGE, E_PID, E_STATE,E_JOINDATE
+    E_ID, E_NAME, E_PASS, E_PHONE, E_SEX, E_AGE,E_DID, E_PID, E_STATE,E_JOINDATE, E_TRAIN
   </sql>
   <select id="selectAllEmployee" resultMap="BaseResultMap"  >
     select 
-    <include refid="Base_Column_List" />
+    *
     from T_EMPLOYEE
   </select>
   <delete id="deleteByID" parameterType="Employee" >
@@ -48,11 +50,17 @@
       <if test="ePid != null" >
         E_PID,
       </if>
+      <if test="eDid != null" >
+        E_DID,
+      </if>
       <if test="eState != null" >
         E_STATE,
       </if>
       <if test="eJoinDate != null" >
         E_JOINDATE,
+      </if>
+      <if test="eTrain != null" >
+        E_TRAIN,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -75,13 +83,19 @@
         #{eAge,jdbcType=DECIMAL},
       </if>
       <if test="ePid != null" >
-        #{ePid,jdbcType=VARCHAR},
+        #{ePid,jdbcType=DECIMAL},
+      </if>
+      <if test="eDid != null" >
+        #{eDid,jdbcType=DECIMAL},
       </if>
       <if test="eState != null" >
         #{eState,jdbcType=VARCHAR},
       </if>
       <if test="eJoinDate != null" >
         #{eJoinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eTrain != null" >
+        #{eTrain},
       </if>
     </trim>
   </insert>
@@ -104,10 +118,16 @@
         E_AGE = #{eAge,jdbcType=DECIMAL},
       </if>
       <if test="ePid != null" >
-        E_PID = #{eEducation,jdbcType=VARCHAR},
+        E_PID = #{ePid,jdbcType=DECIMAL},
+      </if>
+      <if test="eDid != null" >
+        E_DID = #{eDid,jdbcType=DECIMAL},
       </if>
       <if test="eState != null" >
         E_STATE = #{eState,jdbcType=VARCHAR},
+      </if>
+      <if test="eTrain != null" >
+        E_TRAIN = #{eTrain},
       </if>
       <if test="eJoinDate != null" >
         E_JOINDATE = #{eJoinDate,jdbcType=TIMESTAMP},
@@ -123,7 +143,9 @@
       E_SEX = #{eSex,jdbcType=VARCHAR},
     E_AGE = #{eAge,jdbcType=DECIMAL},
       E_STATE = #{eState,jdbcType=VARCHAR},
+      E_TRAIN = #{eTrain},
       E_PID = #{ePid,jdbcType=DECIMAL},
+       E_DID = #{eDid,jdbcType=DECIMAL},
        E_JOINDATE=#{eJoinDate,jdbcType=TIMESTAMP},
     where E_ID = #{eId,jdbcType=DECIMAL}
   </update>

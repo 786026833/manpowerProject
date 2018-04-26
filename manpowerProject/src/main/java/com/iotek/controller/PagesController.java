@@ -2,11 +2,15 @@ package com.iotek.controller;
 
 import com.iotek.biz.DepartmentService;
 import com.iotek.biz.PositionService;
+import com.iotek.biz.RecruitmentInformationService;
 import com.iotek.biz.ResumeService;
 
+import com.iotek.model.RecruitmentInformation;
 import com.iotek.model.Resume;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +28,8 @@ public class PagesController {
     private PositionService positionService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private RecruitmentInformationService recruitmentInformationService;
     @RequestMapping("/skipLogin")
     public String skipLogin(String myselect ){
         if (myselect.equals("opt1")) {
@@ -74,7 +80,8 @@ public class PagesController {
         return "recruit";
     }
     @RequestMapping("/skipAddEmployee")
-    public String skipAddEmployee(Resume resume, HttpServletRequest request, HttpSession session){
+    public String skipAddEmployee(Resume resume,RecruitmentInformation recruitmentInformation, Model model, HttpServletRequest request, HttpSession session){
+        model.addAttribute("rInf",recruitmentInformationService.selectByID(recruitmentInformation));
         session.setAttribute("addResume",resumeService.selectOneResume(resume));
         session.setAttribute("allDepartments",departmentService.selectAllDepartment());
         session.setAttribute("allPositions",positionService.selectAllPosition());
@@ -84,10 +91,6 @@ public class PagesController {
     public String skipResumeDd(){
         return "resumeDd";
     }
-    @RequestMapping("/skipAddRecruitmentInfor")
-    public String skipAddRecruitmentInfor(){
-        return "addRecruitmentInfors";
-    }
     @RequestMapping("/skipAdmRecruitmentInfor")
     public String skipAdmRecruitmentInfor(){
         return "admRecruitmentInfor";
@@ -96,8 +99,28 @@ public class PagesController {
     public String skipDepartment(){
         return "department";
     }
+    @RequestMapping("/skipSelectPosition")
+    public String skipSelectPosition(){
+        return "selectPostion";
+    }
+    @RequestMapping("/skipSelectDepartment")
+    public String skipSelectDepartment(){
+        return "selectDepartment";
+    }
+    @RequestMapping("/skipskipDep_position")
+    public String skipDep_position(){
+        return "dep_position";
+    }
     @RequestMapping("/skipPosition")
     public String skipPosition(){
         return "position";
+    }
+    @RequestMapping("/skipAllTrain")
+    public String skipAllTrain(){
+        return "allTrains";
+    }
+    @RequestMapping("/skipTrain")
+    public String skipTrain(){
+        return "train";
     }
 }

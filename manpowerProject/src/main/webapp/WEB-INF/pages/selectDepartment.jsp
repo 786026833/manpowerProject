@@ -10,18 +10,22 @@
 
     <title></title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
+        /*表格去除空格*/
+        table {
+            border-collapse:collapse;
+            border:1px solid black;
+            margin:0px auto;
+            text-align: center;
         }
-       #div3{
-           background-color: aqua;
-           text-align: center;
-       }
-        a,p{
-            cursor: pointer;
+        td,th {
+            border:1px solid black;
+        }
+        /*超链接去除下划线 带边框*/
+        a{
             display: inline-block;
-            margin-left: 50px;
+            margin-left: 40px;
+            border: 1px solid black;
+            text-decoration: none;
         }
     </style>
     <script  src="js/jquery-3.1.0.js"></script>
@@ -48,7 +52,7 @@
                 <c:forEach var="d" items="${sessionScope.departments}">
                     <tr>
                         <form action="updateteDepartment" method="post">
-                            <td><a href="?dId=${d.dId}">${d.dId}</a></td>
+                            <td><a href="dep_position?dId=${d.dId}">${d.dId}</a></td>
                             <td><input id="input1" type="text" name="dName" value="${d.dName}"></td>
                             <td><input  type="hidden" name="dId" value="${d.dId}"></td>
                             <td>${d.dTime}</td>

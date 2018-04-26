@@ -56,16 +56,8 @@
            性　　别：<input type="text" name="eSex" value="${sessionScope.addResume.rSex}"><br>
            年　　龄：<input type="text" name="eAge" value="${sessionScope.addResume.rAge}"><br>
            在职状态：<input type="text" name="eState" value="试用期"><br>
-           职位选择：
-           部门：<select name="T_DEPARTMENT"  onchange="select_change(this.valueOf())">
-              <c:if test="${!empty sessionScope.allDepartments}">
-               <c:forEach items="${sessionScope.allDepartments}" var="departments">
-                   <option name="T_DEPARTMENT" value=" ${departments.dId}"> ${departments.dName}</option>
-               </c:forEach>
-             </c:if>
-            </select>
-           职位：<select name="T_POSITION"></select><br>
-
+           部门编号：<input type="text" name="eDid" value="${rInf.dId}"><br>
+           职位编号：<input type="text" name="ePid" value="${rInf.pId}"><br>
            <input type="submit" value="添加">  <input type="reset" value="重置">
        </form>
    </div>

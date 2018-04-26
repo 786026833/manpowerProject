@@ -8,6 +8,26 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        /*表格去除空格*/
+        table {
+            border-collapse:collapse;
+            border:1px solid black;
+            margin:0px auto;
+            text-align: center;
+        }
+        td,th {
+            border:1px solid black;
+        }
+        /*超链接去除下划线 带边框*/
+        a{
+            display: inline-block;
+            margin-left: 40px;
+           /* border: 1px solid black;*/
+            background-color: darkgray;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <div id="div3">
@@ -24,12 +44,13 @@
                 <c:forEach var="p" items="${sessionScope.positions}">
                     <tr>
                         <form action="updatePosition" method="post">
-                            <td><a href="?pId=${p.pId}">${p.pId}</a></td>
+                            <td><a href="pos_employee?pId=${p.pId}&num=2">${p.pId}</a></td>
                             <td><input id="input1" type="text" name="pName" value="${p.pName}"></td>
                             <td><input  type="text" name="pSalary" value="${p.pSalary}"></td>
-                            <td><a href="?dId=${p.dId}">${p.dId}</a></td>
+                            <td><a href="?dId=${p.dId}"><input type="text" name="dId" value="${p.dId}" ></a></td>
+                            <input type="hidden" name="pId" value="${p.pId}" >
                             <td><input type="submit" value="修改"></td>
-                            <td><a href="deletePosition?dId=${p.dId}">撤销</a></td>
+                            <td><a href="deletePosition?pId=${p.pId}">撤销</a></td>
                         </form>
                     </tr>
                 </c:forEach>
@@ -40,7 +61,7 @@
             ${暂时还没有任何的信息}
         </c:otherwise>
     </c:choose>
-    <span id="span">${sessionScope.error7}</span>
+    <span id="span">${sessionScope.error9}</span>
 
 </div>
 <a href="skipPosition">返回</a>

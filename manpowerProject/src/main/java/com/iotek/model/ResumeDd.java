@@ -6,13 +6,20 @@ import java.util.Date;
 public class ResumeDd implements Serializable{
     private Long rdId;
 
+    private Long recId;
     private Long rId;
-
     private Date rdTime;
-
     private String rdState;
    private  String rdInterview;
-   public ResumeDd() {
+    public ResumeDd() {
+    }
+
+    public Long getRecId() {
+        return recId;
+    }
+
+    public void setRecId(Long recId) {
+        this.recId = recId;
     }
 
     public ResumeDd(Long rId) {

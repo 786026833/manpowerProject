@@ -19,6 +19,7 @@ public class EmployeeController {
      @RequestMapping("/addEmployee")
     public String addEmployee(Employee employee, HttpServletRequest request, HttpSession session){
          employee.seteJoinDate(new Date());
+         employee.seteTrain((long)0);
          employeeService.addEmployee(employee);
          session.setAttribute("error4","员工录入成功");
          return "resumeDd";

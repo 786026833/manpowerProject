@@ -17,11 +17,28 @@ public class Employee implements Serializable {
 
     private Short eAge;
     private String eState;
-    private long ePid;
+    private Long eDid;
+    private Long ePid;
     private Date eJoinDate;
-
+    private Long eTrain;
     public Long geteId() {
         return eId;
+    }
+
+    public long geteTrain() {
+        return eTrain;
+    }
+
+    public Long geteDid() {
+        return eDid;
+    }
+
+    public void seteDid(Long eDid) {
+        this.eDid = eDid;
+    }
+
+    public void seteTrain(long eTrain) {
+        this.eTrain = eTrain;
     }
 
     public void seteId(Long eId) {
@@ -102,6 +119,7 @@ public class Employee implements Serializable {
                 ", eSex='" + eSex + '\'' +
                 ", eAge=" + eAge +
                 ", eState='" + eState + '\'' +
+                ", eTrain='" + eTrain + '\'' +
                 ", ePid=" + ePid +
                 ", eJoinDate=" + eJoinDate +
                 '}';
