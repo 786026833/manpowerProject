@@ -72,7 +72,12 @@
         <a href="selectInformation?currentPage=${num}&power=1">${num}</a>
     </c:forEach>
     --%>
-    <a href="skipRecruit">返回</a>
+    <c:if test="${sessionScope.pow==1}">
+        <a href="skipRecruit">返回</a>
+    </c:if>
+    <c:if test="${sessionScope.pow==2}">
+        <a href="skipAdm_empl">返回</a>
+    </c:if>
 </div>
 </body>
 </html>

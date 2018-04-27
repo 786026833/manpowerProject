@@ -35,8 +35,9 @@ public class ResumeDdController {
         }
     }
     @RequestMapping("/selectResumeDd")
-    public String selectResumeDd(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+    public String selectResumeDd(int pow,HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         session.setAttribute("resumeDds",resumeDdService.selectAllResumeDd());
+        session.setAttribute("pow",pow);
         return "resumeDd";
     }
     @RequestMapping("/deleteResumeDd")

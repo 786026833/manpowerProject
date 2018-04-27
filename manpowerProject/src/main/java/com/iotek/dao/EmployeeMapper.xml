@@ -141,7 +141,7 @@
       E_PASS = #{ePass,jdbcType=VARCHAR},
       E_PHONE = #{ePhone,jdbcType=VARCHAR},
       E_SEX = #{eSex,jdbcType=VARCHAR},
-    E_AGE = #{eAge,jdbcType=DECIMAL},
+       E_AGE = #{eAge,jdbcType=DECIMAL},
       E_STATE = #{eState,jdbcType=VARCHAR},
       E_TRAIN = #{eTrain},
       E_PID = #{ePid,jdbcType=DECIMAL},

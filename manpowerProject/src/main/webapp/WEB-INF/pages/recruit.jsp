@@ -21,7 +21,7 @@
     <span>${sessionScope.error5}</span>
     <a href="skipAddRecruitmentInfor">添加招聘信息</a><br>
     <a href="admSelectInformation?currentPage=1">查看招聘信息</a><br>
-    <a href="selectResumeDd">查看收到的简历</a><br>
+    <a href="selectResumeDd?pow=1">查看收到的简历</a><br>
     <a href="skipAdministratorPages">返回</a>
 </div>
 </body>

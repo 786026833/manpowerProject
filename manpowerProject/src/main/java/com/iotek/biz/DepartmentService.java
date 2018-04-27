@@ -11,5 +11,6 @@ public interface DepartmentService {
     int deleteById(Department department);
     int addDepartment(Department department);
     List<Department> selectAllDepartment();
+    List<Department> selectAllDep_pos_empl();
     int updateById(Department department);
 }

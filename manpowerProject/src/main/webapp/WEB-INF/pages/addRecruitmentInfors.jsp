@@ -59,7 +59,7 @@
         职位：<select name="pId" id="dId">
         <c:if test="${!empty sessionScope.departments}">
             <c:forEach items="${sessionScope.departments[0].positions}" var="positions">
-                <option name="dId" value=" ${positions.pId}"> ${positions.pName}</option>
+                <option name="pId" value=" ${positions.pId}"> ${positions.pName}</option>
             </c:forEach>
         </c:if>
     </select><br>

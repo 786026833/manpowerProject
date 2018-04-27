@@ -32,6 +32,11 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    public List<Department> selectAllDep_pos_empl() {
+        return departmentMapper.selectAllDep_pos_empl();
+    }
+
+    @Override
     public int updateById(Department department) {
         return departmentMapper.updateById(department);
     }

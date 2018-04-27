@@ -7,18 +7,12 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
-    <style>
-       #div1{
-           background-color: greenyellow;
-           text-align: center;
-       }
-    </style>
 </head>
 <body>
-  <div id="div1">
-      <a href="selectResumeDd?pow=2">添加员工</a>
-      <a href="selectEmployee">查看员工</a>
-  </div>
-  <a href="skipAdministratorPages">返回</a>
+<div>
+    <a href="skipAddRewardPunishment">添加奖惩信息</a>
+    <a href="">查看奖惩信息</a>
+</div>
+<a href="skipAdministratorPages">返回</a>
 </body>
 </html>

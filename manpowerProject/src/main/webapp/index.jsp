@@ -1,10 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -37,3 +32,30 @@
 </body>
 </html>
 
+<%--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.1.0.js"></script>
+</head>
+<body>
+<input type="button" value="点我" onclick=" prompt('请输入');" />
+<script>
+
+       prompt(function () {
+           var judge = prompt("随便输入点什么？");
+           if (judge) {
+
+              /* document.write("输入的内容为："+judge+"。");*/
+           } else {
+              /* document.write("取消就没了哦。");*/
+           }
+       })
+
+
+</script>
+</body>
+</html>
+--%>

@@ -24,6 +24,14 @@
     from T_DEPARTMENT td,T_POSITION tp
     WHERE tp.D_ID=td.D_ID
   </select>
+  <select id="selectAllDep_pos_empl" resultMap="BaseResultMap">
+     select td.*,tp.*
+    from  T_DEPARTMENT td LEFT JOIN (select
+    tp.*,te.*
+    from T_POSITION tp LEFT JOIN T_EMPLOYEE te
+    ON tp.P_ID=te.E_PID)tp
+    ON  tp.D_ID=td.D_ID
+  </select>
   <delete id="deleteById" parameterType="Department" >
     delete from T_DEPARTMENT
     where D_ID = #{dId,jdbcType=DECIMAL}

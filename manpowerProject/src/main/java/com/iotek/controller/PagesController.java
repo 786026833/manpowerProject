@@ -88,7 +88,7 @@ public class PagesController {
         return "addEmployee";
     }
     @RequestMapping("/skipResumeDd")
-    public String skipResumeDd(){
+    public String skipResumeDd(HttpSession session){
         return "resumeDd";
     }
     @RequestMapping("/skipAdmRecruitmentInfor")
@@ -123,4 +123,17 @@ public class PagesController {
     public String skipTrain(){
         return "train";
     }
+    @RequestMapping("/skipAdm_empl")
+    public String skipAdm_empl(){
+        return "adm_empl";
+    }
+    @RequestMapping("/skipSelectEmployee")
+    public String skipSelectEmployee(){
+        return "selectEmployee";
+    }
+    @RequestMapping("/skipRewardPunishment")
+    public String skipRewardPunishment(){
+        return "rewardPunishment";
+    }
+
 }

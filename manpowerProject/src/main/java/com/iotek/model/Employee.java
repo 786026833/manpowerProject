@@ -6,39 +6,19 @@ import java.util.Date;
 
 public class Employee implements Serializable {
     private Long eId;
-
     private String eName;
-
     private String ePass;
-
     private String ePhone;
-
     private String eSex;
-
     private Short eAge;
     private String eState;
     private Long eDid;
     private Long ePid;
     private Date eJoinDate;
     private Long eTrain;
+
     public Long geteId() {
         return eId;
-    }
-
-    public long geteTrain() {
-        return eTrain;
-    }
-
-    public Long geteDid() {
-        return eDid;
-    }
-
-    public void seteDid(Long eDid) {
-        this.eDid = eDid;
-    }
-
-    public void seteTrain(long eTrain) {
-        this.eTrain = eTrain;
     }
 
     public void seteId(Long eId) {
@@ -50,7 +30,7 @@ public class Employee implements Serializable {
     }
 
     public void seteName(String eName) {
-        this.eName = eName == null ? null : eName.trim();
+        this.eName = eName;
     }
 
     public String getePass() {
@@ -58,7 +38,7 @@ public class Employee implements Serializable {
     }
 
     public void setePass(String ePass) {
-        this.ePass = ePass == null ? null : ePass.trim();
+        this.ePass = ePass;
     }
 
     public String getePhone() {
@@ -66,7 +46,7 @@ public class Employee implements Serializable {
     }
 
     public void setePhone(String ePhone) {
-        this.ePhone = ePhone == null ? null : ePhone.trim();
+        this.ePhone = ePhone;
     }
 
     public String geteSex() {
@@ -74,7 +54,7 @@ public class Employee implements Serializable {
     }
 
     public void seteSex(String eSex) {
-        this.eSex = eSex == null ? null : eSex.trim();
+        this.eSex = eSex;
     }
 
     public Short geteAge() {
@@ -90,14 +70,22 @@ public class Employee implements Serializable {
     }
 
     public void seteState(String eState) {
-        this.eState = eState == null ? null : eState.trim();
+        this.eState = eState;
     }
 
-    public long getePid() {
+    public Long geteDid() {
+        return eDid;
+    }
+
+    public void seteDid(Long eDid) {
+        this.eDid = eDid;
+    }
+
+    public Long getePid() {
         return ePid;
     }
 
-    public void setePid(long ePid) {
+    public void setePid(Long ePid) {
         this.ePid = ePid;
     }
 
@@ -107,6 +95,14 @@ public class Employee implements Serializable {
 
     public void seteJoinDate(Date eJoinDate) {
         this.eJoinDate = eJoinDate;
+    }
+
+    public Long geteTrain() {
+        return eTrain;
+    }
+
+    public void seteTrain(Long eTrain) {
+        this.eTrain = eTrain;
     }
 
     @Override
@@ -119,9 +115,10 @@ public class Employee implements Serializable {
                 ", eSex='" + eSex + '\'' +
                 ", eAge=" + eAge +
                 ", eState='" + eState + '\'' +
-                ", eTrain='" + eTrain + '\'' +
+                ", eDid=" + eDid +
                 ", ePid=" + ePid +
                 ", eJoinDate=" + eJoinDate +
+                ", eTrain=" + eTrain +
                 '}';
     }
 }
