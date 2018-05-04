@@ -5,11 +5,12 @@
     <id column="RP_ID" property="rpId" jdbcType="DECIMAL" />
     <result column="RP_TIME" property="rpTime" jdbcType="TIMESTAMP" />
     <result column="RP_CAUSE" property="rpCause" jdbcType="VARCHAR" />
+    <result column="RE_NAME" property="reName" jdbcType="VARCHAR" />
     <result column="RP_SAL" property="rpSal" jdbcType="DECIMAL" />
     <result column="E_ID" property="eId" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    RP_ID, RP_TIME, RP_CAUSE, RP_SAL, E_ID
+    RP_ID, RP_TIME, RP_CAUSE, RP_SAL, E_ID,RE_NAME
   </sql>
   <select id="selectByID" resultMap="BaseResultMap" parameterType="RewardPunishment" >
     select 
@@ -17,20 +18,29 @@
     from T_REWARD_PUNISHMENT
     where RP_ID = #{rpId,jdbcType=DECIMAL}
   </select>
-  <select id="selectAllRewardPunishment" resultType="com.iotek.model.RewardPunishment">
+  <select id="selectAllRewardPunishment" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from T_REWARD_PUNISHMENT
+  </select>
+  <select id="selectByEid" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from T_REWARD_PUNISHMENT
+    WHERE E_ID=#{eId}
+  </select>
+  <select id="select" resultMap="BaseResultMap">
+    SELECT * FROM T_REWARD_PUNISHMENT
+    WHERE (to_char(RP_TIME,'MM')=#{month}
+    AND E_ID=#{eId}
   </select>
   <delete id="deleteByID" parameterType="RewardPunishment" >
     delete from T_REWARD_PUNISHMENT
     where RP_ID = #{rpId,jdbcType=DECIMAL}
   </delete>
   <insert id="addRewardPunishment" parameterType="com.iotek.model.RewardPunishment" >
-    insert into T_REWARD_PUNISHMENT ( RP_TIME, RP_CAUSE,
-      RP_SAL, E_ID)
-    values ( #{rpTime,jdbcType=TIMESTAMP}, #{rpCause,jdbcType=VARCHAR},
-      #{rpSal,jdbcType=DECIMAL}, #{eId,jdbcType=DECIMAL})
+    insert into T_REWARD_PUNISHMENT (RP_TIME, RP_CAUSE, RP_SAL, E_ID, RE_NAME)
+    VALUES (#{rpTime},#{rpCause},#{rpSal},#{eId},#{reName})
   </insert>
 
   <update id="updateByID" parameterType="com.iotek.model.RewardPunishment" >
@@ -41,6 +51,9 @@
       </if>
       <if test="rpCause != null" >
         RP_CAUSE = #{rpCause,jdbcType=VARCHAR},
+      </if>
+      <if test="reName != null" >
+        RE_NAME = #{reName,jdbcType=VARCHAR},
       </if>
       <if test="rpSal != null" >
         RP_SAL = #{rpSal,jdbcType=DECIMAL},

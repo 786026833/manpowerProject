@@ -11,8 +11,9 @@ import java.util.List;
 public interface RewardPunishmentService {
     int deleteByID(RewardPunishment rewardPunishment);
     int addRewardPunishment(RewardPunishment rewardPunishment);
-
+    List<RewardPunishment> selectByEid(RewardPunishment rewardPunishment);
     RewardPunishment selectByID(RewardPunishment rewardPunishment);
     List<RewardPunishment> selectAllRewardPunishment();
     int updateByID(RewardPunishment rewardPunishment);
+    List<RewardPunishment> select(String month,long eId);
 }

@@ -36,24 +36,31 @@ public class TrainController {
     }
     @RequestMapping("/addTrain")
     public String addTrain(String trId,Train train ,HttpSession session,Model model) {
-        List<Department> departments= (List<Department>) session.getAttribute("d");
-        for (Department d:departments) {
-            if (Long.parseLong(trId) == d.getdId()){
-                train.settTrainee(d.getdName());
-                for (Position p:d.getPositions()) {
-                    List<Employee> list= employeeService.selectAllEmployee();
-                    for (Employee e:list) {
-                        if (e.getePid()==p.getpId()) {
-                            e.seteTrain((long) 1);
-                            employeeService.updateByID(e);
+        if (train.gettEndTime().compareTo(train.gettBeginTime())<0){
+            model.addAttribute("erroe","结束时间不能比开始时间早");
+            return "addTrain";
+        }else{
+            List<Department> departments= (List<Department>) session.getAttribute("d");
+            for (Department d:departments) {
+                if (Long.parseLong(trId) == d.getdId()){
+                    train.settTrainee(d.getdName());
+                    for (Position p:d.getPositions()) {
+                        List<Employee> list= employeeService.selectAllEmployee();
+                        for (Employee e:list) {
+                            if (e.getePid()==p.getpId()) {
+                                e.seteTrain((long) 1);
+                                employeeService.updateByID(e);
+                            }
                         }
                     }
                 }
             }
+            train.settBeginTime(train.gettBeginTime().replace("T",""));
+            train.settEndTime(train.gettEndTime().replace("T",""));
+            trainService.addTrain(train);
+            model.addAttribute("erroe","添加成功");
+            return "train";
         }
-        trainService.addTrain(train);
-        model.addAttribute("erroe","添加成功");
-        return "train";
     }
     @RequestMapping("/selectTrain")
     public String selectTrain(HttpSession session,Model model){
@@ -82,5 +89,18 @@ public class TrainController {
         trainService.updateByID(train);
         model.addAttribute("error","修改成功");
         return selectTrain(session,model);
+    }
+    @RequestMapping("/queryTrain")
+    public String queryTrain(Employee employee,Train train,HttpSession session,Model model){
+        List<Employee> list=employeeService.selectAllEmployee();
+        for (Employee e:list){
+            if (e.geteId()==employee.geteId()){
+                e.seteTrain((long)0);
+                employeeService.updateByID(e);
+            }
+        }
+        model.addAttribute("trains",trainService.selectByeDid(train));
+        model.addAttribute("employee",employee);
+        return "queryTrain";
     }
 }

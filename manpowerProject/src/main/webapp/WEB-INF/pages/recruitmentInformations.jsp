@@ -27,6 +27,7 @@
         table {
             border-collapse:collapse;
             border:1px solid black;
+            margin: 0 auto;
         }
         th,td {
             border:1px solid black;
@@ -74,7 +75,7 @@
     <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
         <a href="selectInformation?currentPage=${num}&power=1">${num}</a>
     </c:forEach>
-    <a href="skipWelcome">返回</a>
+        <a href="skipWelcome">返回</a>
 </div>
 
 

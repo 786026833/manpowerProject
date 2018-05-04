@@ -1,13 +1,10 @@
 package com.iotek.controller;
 
-import com.iotek.biz.DepartmentService;
-import com.iotek.biz.PositionService;
-import com.iotek.biz.RecruitmentInformationService;
-import com.iotek.biz.ResumeService;
+import com.iotek.biz.*;
 
+import com.iotek.model.Employee;
 import com.iotek.model.RecruitmentInformation;
 import com.iotek.model.Resume;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +20,8 @@ import java.util.List;
 @Controller
 public class PagesController {
     @Autowired
+    private EmployeeService employeeService;
+    @Autowired
     private ResumeService resumeService;
     @Autowired
     private PositionService positionService;
@@ -34,8 +33,10 @@ public class PagesController {
     public String skipLogin(String myselect ){
         if (myselect.equals("opt1")) {
             return "login";
-        }else{
+        }else if(myselect.equals("opt2")){
             return "administrator";
+        }else{
+            return "employee";
         }
     }
     @RequestMapping("/skipWelcome")
@@ -47,18 +48,19 @@ public class PagesController {
         return "userRegister";
     }
     @RequestMapping("/skipResume")
-    public String skipResume(int permission, HttpSession session){
+    public String skipResume(int permission, Model model){
         if (permission==2){
-            session.setAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
+            model.addAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
             return "../../index";
         }else{
+
             return "resume";
         }
     }
     @RequestMapping("/skipQueryResume")
-    public String skipQueryResume(int permission,int resume, HttpSession session){
+    public String skipQueryResume(int permission,int resume, Model model, HttpSession session){
         if (permission==2){
-            session.setAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
+           model.addAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
             return "../../index";
         }else{
             List<Resume> list= (List<Resume>) session.getAttribute("resume");
@@ -135,5 +137,52 @@ public class PagesController {
     public String skipRewardPunishment(){
         return "rewardPunishment";
     }
-
+    @RequestMapping("/skipSalary")
+    public String skipSalary(){
+        return "salary";
+    }
+    @RequestMapping("/skipIndex")
+    public String skipIndex(){
+        return "../../index";
+    }
+    @RequestMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("error2","你还不是用户，没有权限，请先去注册用户");
+        return "../../index";
+    }
+    @RequestMapping("/skipEmployeePages")
+    public String skipEmployeePages(Employee employee,Model model) {
+        List<Employee> list=employeeService.selectAllEmployee();
+        for (Employee e:list){
+            if (e.geteId()==employee.geteId()){
+               model.addAttribute("employee",e);
+            }
+        }
+        return "employeePages";
+    }
+    @RequestMapping("/skipAllPages")
+    public String skipAllPages(Employee employee,Model model) {
+        List<Employee> list=employeeService.selectAllEmployee();
+        for (Employee e:list){
+            if (e.geteId()==employee.geteId()){
+                model.addAttribute("employee",e);
+            }
+        }
+        return "allPages";
+    }
+    @RequestMapping("/skipQueryAllPages")
+    public String skipQueryAllPages(Employee employee,Model model) {
+        model.addAttribute("employee",employee);
+        return "queryAllDepartment";
+    }
+    @RequestMapping("/skipAll_dep_pos")
+    public String skipAll_dep_pos(Employee employee,Model model) {
+        model.addAttribute("employee",employee);
+        return "all_dep_pos";
+    }
+    @RequestMapping("/skipAll_dep_pos1")
+    public String skipAll_dep_pos1(Employee employee,Model model) {
+        model.addAttribute("employee",employee);
+        return "all_dep_pos1";
+    }
 }

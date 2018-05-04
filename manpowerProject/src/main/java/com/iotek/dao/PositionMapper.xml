@@ -39,6 +39,11 @@
     from T_POSITION tp LEFT JOIN T_EMPLOYEE te
      ON tp.P_ID=te.E_PID ) WHERE P_ID =#{pId}
   </select>
+  <select id="selectByID1" resultMap="BaseResultMap">
+    SELECT * FROM
+     T_POSITION
+     WHERE P_ID =#{pId}
+  </select>
 
   <insert id="addPosition" parameterType="com.iotek.model.Position" >
     insert into T_POSITION

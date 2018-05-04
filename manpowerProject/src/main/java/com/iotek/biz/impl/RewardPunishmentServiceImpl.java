@@ -27,6 +27,11 @@ public class RewardPunishmentServiceImpl implements RewardPunishmentService{
     }
 
     @Override
+    public List<RewardPunishment> selectByEid(RewardPunishment rewardPunishment) {
+        return rewardPunishmentMapper.selectByEid(rewardPunishment);
+    }
+
+    @Override
     public RewardPunishment selectByID(RewardPunishment rewardPunishment) {
         return rewardPunishmentMapper.selectByID(rewardPunishment);
     }
@@ -39,5 +44,10 @@ public class RewardPunishmentServiceImpl implements RewardPunishmentService{
     @Override
     public int updateByID(RewardPunishment rewardPunishment) {
         return rewardPunishmentMapper.updateByID(rewardPunishment);
+    }
+
+    @Override
+    public List<RewardPunishment> select(String month, long eId) {
+        return rewardPunishmentMapper.select(month,eId);
     }
 }

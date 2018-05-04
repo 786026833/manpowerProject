@@ -11,6 +11,6 @@ public interface RewardPunishmentMapper {
     RewardPunishment selectByID(RewardPunishment rewardPunishment);
     List<RewardPunishment> selectAllRewardPunishment();
     int updateByID(RewardPunishment rewardPunishment);
-
-
+    List<RewardPunishment> selectByEid(RewardPunishment rewardPunishment);
+    List<RewardPunishment> select(String month,long eId);
 }

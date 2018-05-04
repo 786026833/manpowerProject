@@ -39,4 +39,9 @@ public class SalaryServiceImpl implements SalaryService {
     public int updateByID(Salary salary) {
         return salaryMapper.updateByID(salary);
     }
+
+    @Override
+    public List<Salary> selectByEiD(Salary salary) {
+        return salaryMapper.selectByEiD(salary);
+    }
 }

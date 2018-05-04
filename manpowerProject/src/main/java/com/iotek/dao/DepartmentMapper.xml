@@ -9,6 +9,19 @@
       <id property="pId" column="P_ID"/>
       <result property="pName" column="P_NAME"/>
       <result property="pSalary" column="P_SALARY"/>
+      <collection property="employees" ofType="Employee">
+        <id column="E_ID" property="eId" jdbcType="DECIMAL" />
+        <result column="E_NAME" property="eName" jdbcType="VARCHAR" />
+        <result column="E_PASS" property="ePass" jdbcType="VARCHAR" />
+        <result column="E_PHONE" property="ePhone" jdbcType="VARCHAR" />
+        <result column="E_SEX" property="eSex" jdbcType="VARCHAR" />
+        <result column="E_Age" property="eAge" jdbcType="DECIMAL" />
+        <result column="E_PID" property="ePid" jdbcType="DECIMAL" />
+        <result column="E_DID" property="eDid" jdbcType="DECIMAL" />
+        <result column="E_EDUCATION" property="ePid" jdbcType="DECIMAL" />
+        <result column="E_STATE" property="eState" jdbcType="VARCHAR" />
+        <result column="E_JOINDATE" property="eJoinDate" jdbcType="TIMESTAMP"/>
+      </collection>
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >

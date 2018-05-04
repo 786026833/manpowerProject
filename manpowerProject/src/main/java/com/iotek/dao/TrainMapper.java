@@ -9,5 +9,5 @@ public interface TrainMapper {
     int addTrain(Train train);
     List<Train> selectByAllTrain();
     int updateByID(Train train);
-
+    List<Train> selectByeDid(Train train);
 }

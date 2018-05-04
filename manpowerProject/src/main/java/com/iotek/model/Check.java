@@ -14,7 +14,8 @@ public class Check {
 
     private String cLeave;
 
-    private BigDecimal eId;
+    private long eId;
+    private String cAbsenteeism;
 
     public Long getcId() {
         return cId;
@@ -22,6 +23,14 @@ public class Check {
 
     public void setcId(Long cId) {
         this.cId = cId;
+    }
+
+    public String getcAbsenteeism() {
+        return cAbsenteeism;
+    }
+
+    public void setcAbsenteeism(String cAbsenteeism) {
+        this.cAbsenteeism = cAbsenteeism;
     }
 
     public Date getcWorkTime() {
@@ -56,11 +65,24 @@ public class Check {
         this.cLeave = cLeave == null ? null : cLeave.trim();
     }
 
-    public BigDecimal geteId() {
+    public long geteId() {
         return eId;
     }
 
-    public void seteId(BigDecimal eId) {
+    public void seteId(long eId) {
         this.eId = eId;
+    }
+
+    @Override
+    public String toString() {
+        return "Check{" +
+                "cId=" + cId +
+                ", cWorkTime=" + cWorkTime +
+                ", cOffworkTine=" + cOffworkTine +
+                ", cLate='" + cLate + '\'' +
+                ", cLeave='" + cLeave + '\'' +
+                ", eId=" + eId +
+                ", cAbsenteeism='" + cAbsenteeism + '\'' +
+                '}';
     }
 }

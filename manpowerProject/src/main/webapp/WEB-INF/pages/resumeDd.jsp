@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -26,6 +27,7 @@
         table {
             border-collapse:collapse;
             border:1px solid black;
+            margin: 0 auto;
         }
         th,td {
             border:1px solid black;
@@ -56,7 +58,7 @@
             <tr>
                 <td>${resumeDd.rdId}</td>
                 <td>${resumeDd.rId}</td>
-                <td>${resumeDd.rdTime}</td>
+                <td><fmt:formatDate value="${resumeDd.rdTime}" type="Date" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
                 <td>${resumeDd.rdState}</td>
                 <td>${resumeDd.rdInterview}</td>
                 <td><a href="selectResume?rId=${resumeDd.rId}&rdId=${resumeDd.rdId}">查阅</a></td>

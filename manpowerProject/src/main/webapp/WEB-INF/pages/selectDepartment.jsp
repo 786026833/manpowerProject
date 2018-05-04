@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -47,6 +48,7 @@
                     <th>部门名称</th>
                     <th>创建时间</th>
                     <th></th>
+
                     <th></th>
                 </tr>
                 <c:forEach var="d" items="${sessionScope.departments}">
@@ -54,8 +56,8 @@
                         <form action="updateteDepartment" method="post">
                             <td><a href="dep_position?dId=${d.dId}">${d.dId}</a></td>
                             <td><input id="input1" type="text" name="dName" value="${d.dName}"></td>
-                            <td><input  type="hidden" name="dId" value="${d.dId}"></td>
-                            <td>${d.dTime}</td>
+                            <input  type="hidden" name="dId" value="${d.dId}">
+                            <td><fmt:formatDate value="${d.dTime}" type="Date" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
                             <td><input type="submit" value="修改"></td>
                             <td><a href="deleteDepartment?dId=${d.dId}">撤销</a></td>
                         </form>

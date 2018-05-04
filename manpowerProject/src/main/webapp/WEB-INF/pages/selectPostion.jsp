@@ -13,7 +13,7 @@
         table {
             border-collapse:collapse;
             border:1px solid black;
-            margin:0px auto;
+            margin:0 auto;
             text-align: center;
         }
         td,th {
@@ -58,7 +58,7 @@
 
         </c:when>
         <c:otherwise>
-            ${暂时还没有任何的信息}
+            暂时还没有任何的信息
         </c:otherwise>
     </c:choose>
     <span id="span">${sessionScope.error9}</span>

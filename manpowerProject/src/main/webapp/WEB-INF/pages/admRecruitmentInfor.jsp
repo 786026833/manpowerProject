@@ -27,6 +27,7 @@
         table {
             border-collapse:collapse;
             border:1px solid black;
+            margin: 0 auto;
         }
         th,td {
             border:1px solid black;
@@ -41,8 +42,9 @@
 </head>
 <body>
 <div id="queryDiv">
-    <h2>招聘信息</h2>
+
     <table>
+        <tr><th colspan="2"> <h2>招聘信息</h2></th></tr>
         <tr>
             <th>标题</th>
             <th>状态（1.发布 0.未发布）</th>

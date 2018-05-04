@@ -8,6 +8,7 @@ public interface SalaryMapper {
     int deleteByID(Salary salary);
     int addSalary(Salary salary);
     Salary selectByID(Salary salary);
+    List<Salary> selectByEiD(Salary salary);
     List<Salary> selectAllSalary();
     int updateByID(Salary salary);
 }

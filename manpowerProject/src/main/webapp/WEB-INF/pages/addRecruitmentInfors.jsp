@@ -14,6 +14,17 @@
             text-align: center;
             width: 600px;
             height: 600px;
+            margin: 0 auto;
+        }
+        table {
+            border-collapse:collapse;
+            border:1px solid black;
+            margin: 0 auto;
+        }
+        th,td {
+            border:1px solid black;
+            width: 100px;
+            text-align: center;
         }
     </style>
     <script type="text/javascript">
@@ -46,26 +57,26 @@
 </head>
 <body>
 <div id="div1">
-    <h1>添加招聘信息</h1>
     <form action="addInformation" method="post" name="form1">
-        标　　题：<input type="text" name="recTitle" required="required"><br>
-        部门：<select name="dId"  onchange="select_change(this)">
-        <c:if test="${!empty sessionScope.departments}">
-            <c:forEach items="${sessionScope.departments}" var="departments">
-                <option name="dId" value=" ${departments.dId}"> ${departments.dName}</option>
-            </c:forEach>
-        </c:if>
-    </select>
-        职位：<select name="pId" id="dId">
-        <c:if test="${!empty sessionScope.departments}">
-            <c:forEach items="${sessionScope.departments[0].positions}" var="positions">
-                <option name="pId" value=" ${positions.pId}"> ${positions.pName}</option>
-            </c:forEach>
-        </c:if>
-    </select><br>
-        信息简述：<br>
-        <textarea name="recContent" style="width:200px;height:80px;" required="required"></textarea><br>
-
+        <table>
+            <tr><th colspan="2"><h1>添加招聘信息</h1></th></tr>
+            <tr><th>标　　题</th><td><input type="text" name="recTitle" required="required"></td></tr>
+            <tr><th>部门</th><td><select name="dId"  onchange="select_change(this)">
+                <c:if test="${!empty sessionScope.departments}">
+                    <c:forEach items="${sessionScope.departments}" var="departments">
+                        <option name="dId" value=" ${departments.dId}"> ${departments.dName}</option>
+                    </c:forEach>
+                </c:if>
+            <tr><th>职位</th><td><select name="pId" id="dId">
+                <c:if test="${!empty sessionScope.departments}">
+                    <c:forEach items="${sessionScope.departments[0].positions}" var="positions">
+                        <option name="pId" value=" ${positions.pId}"> ${positions.pName}</option>
+                    </c:forEach>
+                </c:if>
+            </select></td></tr>
+            <tr><th>信息简述</th><td><textarea name="recContent" style="width:200px;height:80px;" required="required"></textarea></td></tr>
+        </table>
+        <%--时　　间：<input type="datetime-local" name="rpTime" placeholder="时间" required="required"><br>--%>
         <input type="submit" value="添加">
         <input type="reset" value="重置">
     </form>

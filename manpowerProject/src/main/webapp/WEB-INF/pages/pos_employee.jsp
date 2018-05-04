@@ -31,34 +31,42 @@
 </head>
 <body>
       <div>
-          <table>
-              <tr>
-                  <th>员工编号</th>
-                  <th>员工姓名</th>
-                  <th>员工密码</th>
-                  <th>联系电话</th>
-                  <th>性　　别</th>
-                  <th>年　　龄</th>
-                  <th>任职状态</th>
-                  <th>职位编号</th>
-                  <th>部门编号</th>
-                  <th>入职日期</th>
-              </tr>
-              <c:forEach items="${sessionScope.employees}" var="empl">
-                  <tr>
-                      <td>${empl.eId}</td>
-                      <td>${empl.eName}</td>
-                      <td>${empl.ePass}</td>
-                      <td>${empl.ePhone}</td>
-                      <td>${empl.eSex}</td>
-                      <td>${empl.eAge}</td>
-                      <td>${empl.eState}</td>
-                      <td>${empl.ePid}</td>
-                      <td>${empl.eDid}</td>
-                      <td><fom:formatDate value="${empl.eJoinDate}" type="Date" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
-                  </tr>
-              </c:forEach>
-          </table>
+          <c:choose>
+              <c:when test="${!empty sessionScope.employees}">
+                  <table>
+                      <tr>
+                          <th>员工编号</th>
+                          <th>员工姓名</th>
+                          <th>员工密码</th>
+                          <th>联系电话</th>
+                          <th>性　　别</th>
+                          <th>年　　龄</th>
+                          <th>任职状态</th>
+                          <th>职位编号</th>
+                          <th>部门编号</th>
+                          <th>入职日期</th>
+                      </tr>
+                      <c:forEach items="${sessionScope.employees}" var="empl">
+                          <tr>
+                              <td>${empl.eId}</td>
+                              <td>${empl.eName}</td>
+                              <td>${empl.ePass}</td>
+                              <td>${empl.ePhone}</td>
+                              <td>${empl.eSex}</td>
+                              <td>${empl.eAge}</td>
+                              <td>${empl.eState}</td>
+                              <td>${empl.ePid}</td>
+                              <td>${empl.eDid}</td>
+                              <td><fom:formatDate value="${empl.eJoinDate}" type="Date" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
+                          </tr>
+                      </c:forEach>
+                  </table>
+              </c:when>
+              <c:otherwise>
+                  该职位暂时还没有员工
+              </c:otherwise>
+          </c:choose>
+
           <c:if test="${num==1}">
               <a href="skipskipDep_position">返回</a>
           </c:if>

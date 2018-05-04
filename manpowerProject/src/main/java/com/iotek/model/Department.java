@@ -10,6 +10,7 @@ public class Department implements Serializable{
     private String dName;
     private Date dTime;
     private Set<Position> positions=new HashSet<>();
+    private Set<Employee> employees=new HashSet<>();
     public Long getdId() {
         return dId;
     }
@@ -40,6 +41,14 @@ public class Department implements Serializable{
 
     public void setPositions(Set<Position> positions) {
         this.positions = positions;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

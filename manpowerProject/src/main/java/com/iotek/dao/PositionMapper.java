@@ -10,4 +10,5 @@ public interface PositionMapper {
     List<Position> selectAllPosition();
     int updateByID(Position position);
     Position selectByID(Position position);
+    Position selectByID1(Position position);
 }

@@ -3,6 +3,7 @@ package com.iotek.controller;
 import com.iotek.biz.DepartmentService;
 import com.iotek.biz.PositionService;
 import com.iotek.model.Department;
+import com.iotek.model.Employee;
 import com.iotek.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,38 @@ public class PositionController {
         }
         model.addAttribute("num",num);
         return "pos_employee";
+    }
+    @RequestMapping("/queryAllemployee")
+    public String queryAllemployee(int num, Employee employee,Position position, Model model, HttpSession session){
+        List<Position> positions= positionService.selectAllPosition();
+        for (Position p:positions) {
+            if (p.getpId()==position.getpId()){
+                session.setAttribute("employees",p.getEmployees());
+            }
+        }
+        model.addAttribute("employee",employee);
+        model.addAttribute("num",num);
+        return "queryAllemployee";
+    }
+    @RequestMapping("/queryAllPos")
+    public String queryAllPos(Employee employee, Model model, HttpSession session){
+        List<Position> positions= positionService.selectAllPosition();
+        session.setAttribute("p1",positions);
+        List<Department> departments= departmentService.selectAllDepartment();
+        session.setAttribute("d1",departments);
+        model.addAttribute("employee",employee);
+        return "all_dep_pos1";
+    }
+    @RequestMapping("/queryAllemployee1")
+    public String queryAllemployee1(Employee employee,Position position, Model model, HttpSession session){
+        List<Position> positions= positionService.selectAllPosition();
+        for (Position p:positions) {
+            if (p.getpId()==position.getpId()){
+                session.setAttribute("employees",p.getEmployees());
+            }
+        }
+        model.addAttribute("employee",employee);
+        return "queryAllemployee1";
     }
     @RequestMapping("/deletePosition")
     public String deletePosition(Position position, HttpSession session){

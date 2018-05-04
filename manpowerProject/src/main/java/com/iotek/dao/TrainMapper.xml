@@ -20,6 +20,12 @@
     from T_TRAIN
 
   </select>
+  <select id="selectByeDid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_TRAIN
+   WHERE TR_ID=#{trId}
+  </select>
   <delete id="deleteByID" parameterType="Train" >
     delete from T_TRAIN
     where T_ID = #{tId,jdbcType=DECIMAL}

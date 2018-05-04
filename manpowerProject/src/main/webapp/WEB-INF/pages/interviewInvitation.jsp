@@ -26,6 +26,7 @@
         table {
             border-collapse:collapse;
             border:1px solid black;
+            margin: 0 auto;
         }
         th,td {
             border:1px solid black;
@@ -36,27 +37,34 @@
 </head>
 <body>
 <div id="queryDiv">
-    <table>
-        <tr>
-            <th>信息ID</th>
-            <th>面试时间</th>
-            <th>面试地点</th>
 
-        </tr>
-        <c:forEach var="iis" items="${sessionScope.interviewInvitations}">
-            <tr>
-                <td>${iis.iId}</td>
-                <td>${iis.iInterviewTime}</td>
-                <td>${iis.iInterviewSite}</td>
-                <c:if test="${iis.iState==0}">
-                    <td>已确认面试</td>
-                </c:if>
-                <c:if test="${iis.iState==1}">
-                    <td><a href="updateInterviewInvitation?iId=${iis.iId}">确认面试</a></td>
-                </c:if>
-            </tr>
-        </c:forEach>
-    </table>
+        <c:if test="${empty sessionScope.interviewInvitations}">
+            还没有面试邀请信息
+        </c:if>
+        <c:if test="${!empty sessionScope.interviewInvitations}">
+            <table>
+                <tr>
+                    <th>信息ID</th>
+                    <th>面试时间</th>
+                    <th>面试地点</th>
+                    <th></th>
+                </tr>
+                <c:forEach var="iis" items="${sessionScope.interviewInvitations}">
+                    <tr>
+                        <td>${iis.iId}</td>
+                        <td>${iis.iInterviewTime}</td>
+                        <td>${iis.iInterviewSite}</td>
+                        <c:if test="${iis.iState==0}">
+                            <td>已确认面试</td>
+                        </c:if>
+                        <c:if test="${iis.iState==1}">
+                            <td><a href="updateInterviewInvitation?iId=${iis.iId}">确认面试</a></td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
     <%-- 分页
     <c:forEach var="num" begin="1" end= "${sessionScope.totalPages}">
          <a href="selectInformation?currentPage=${num}&power=1">${num}</a>

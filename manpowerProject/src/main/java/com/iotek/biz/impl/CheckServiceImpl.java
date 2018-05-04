@@ -6,6 +6,7 @@ import com.iotek.model.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,5 +35,15 @@ public class CheckServiceImpl implements CheckService{
     @Override
     public int updateByID(Check check) {
         return checkMapper.updateByID(check);
+    }
+
+    @Override
+    public List<Check> selectAllCheckByEid(Check check) {
+        return checkMapper.selectAllCheckByEid(check);
+    }
+
+    @Override
+    public List<Check> select(Check check) {
+        return checkMapper.select(check);
     }
 }

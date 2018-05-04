@@ -1,11 +1,14 @@
 package com.iotek.controller;
 
+import com.iotek.biz.EmployeeService;
 import com.iotek.biz.ResumeService;
 import com.iotek.biz.UserService;
+import com.iotek.model.Employee;
 import com.iotek.model.Resume;
 import com.iotek.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletException;
@@ -28,6 +31,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private EmployeeService employeeService;
     @RequestMapping("/login")
     public String login(User user, String auto,String command, HttpServletRequest request, HttpSession session, HttpServletResponse response){
         if (command.equals("sss")){
@@ -108,6 +113,44 @@ public class UserController {
             }
         }
     }
+    @RequestMapping("/login1")
+    public String login1(Employee employee, String auto, HttpServletRequest request,
+                         HttpSession session, HttpServletResponse response,Model model){
+
+            employee=employeeService.selectByNamePass(employee);
+            if (employee!=null){
+                //判断是否勾选记住密码
+                if (auto!=null){
+                    try {
+                        String name= URLEncoder.encode(employee.geteName(),"UTF-8");
+                        String pass= URLEncoder.encode(employee.getePass(),"UTF-8");
+                        Cookie cookie_emplName=new Cookie("employeeName",name);
+                        Cookie cookie_emplPwd=new Cookie("employeePwd",pass);
+                        //设置cookie的持久化时间
+                        cookie_emplName.setMaxAge(60*60*24*4);
+                        cookie_emplPwd.setMaxAge(60*60*24*4);
+                        //设置cookie的携带路径
+                        cookie_emplName.setPath(request.getContextPath());//设定无论访问本网站的哪个服务 都可以直接登录   可有可无
+                        cookie_emplPwd.setPath(request.getContextPath());//因为都在web工程下
+                        response.addCookie(cookie_emplName);
+                        response.addCookie(cookie_emplPwd);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    // user=userService.selectByID(user);
+
+                   model.addAttribute("employee",employee);
+                    return "employeePages";
+                }else{
+
+                    model.addAttribute("employee",employee);
+                    return "employeePages";
+                }
+            }else {
+                model.addAttribute("error","账号或密码错误");
+                return "employee";
+            }
+    }
     @RequestMapping("/autoLogin")
     public String autoLogin(String command, HttpServletRequest request, HttpSession session, HttpServletResponse response) throws ServletException, IOException {
         //定义 用户名和密码
@@ -185,5 +228,38 @@ public class UserController {
             session.setAttribute("error1","用户名已存在，不能注册");
             return "userRegister";
         }
+    }
+    @RequestMapping("/autoLogin1")
+    public String autoLogin1(HttpServletRequest request, HttpSession session, HttpServletResponse response,Model model) throws ServletException, IOException {
+        //定义 用户名和密码
+        String cookie_emplName=null;
+        String cookie_emplPwd=null;
+        //获取cookie 数组
+        Cookie[] cookies=request.getCookies();
+            if (cookies!=null){
+                for (Cookie cookie:cookies ) {
+                    if ("employeePwd".equals(cookie.getName())){
+                        cookie_emplPwd=cookie.getValue();
+                        cookie_emplPwd= URLDecoder.decode(cookie_emplPwd, "UTF-8");
+                    }
+                    if ("employeeName".equals(cookie.getName())){
+                        cookie_emplName=cookie.getValue();
+                        cookie_emplName= URLDecoder.decode(cookie_emplName, "UTF-8");
+                    }
+                }
+                //判断用户名和密码是否为空
+                if (cookie_emplName!=null&&cookie_emplPwd!=null){
+                    Employee employee=new Employee(cookie_emplName,cookie_emplPwd);
+                    //调用登陆方法
+                    Employee employee1= employeeService.selectByNamePass(employee);
+                    if (employee1!=null) {
+                        model.addAttribute("employee",employee1);
+                        return "employeePages";
+                    }else{
+                        return "employee";
+                    }
+                }
+            }
+            return "employee";
     }
 }

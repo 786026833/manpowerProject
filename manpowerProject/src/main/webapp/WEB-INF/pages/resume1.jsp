@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html>
-<head>d
+<head>
     <base href="<%=basePath%>"/>
     <title></title>
     <style type="text/css">
@@ -23,15 +23,17 @@
             text-align: center;
             border: 1px solid blue;
         }
-      /*  table {
+
+        table {
             border-collapse:collapse;
             border:1px solid black;
+            margin: 0 auto;
         }
         th,td {
             border:1px solid black;
             width: 100px;
             text-align: center;
-        }*/
+        }
         #div2{
             display: none;
         }
@@ -41,16 +43,17 @@
 <div id="queryDiv">
     <c:if test="${!empty sessionScope.oneResume}">
         简历编号：<span>${sessionScope.resumeDd.rdId}</span>
-            姓　　名：${sessionScope.oneResume.rName}<br>
-            性　　别：${sessionScope.oneResume.rSex}<br>
-            联系电话：${sessionScope.oneResume.rPhone}<br>
-            年　　龄：${sessionScope.oneResume.rAge}<br>
-            学　　历：${sessionScope.oneResume.rEducation}<br>
-            工作经历：<br>
-            <textarea  name="rWorkExperience" style="width:200px;height:80px;" required="required">
+        <table>
+            <tr> <th>姓　　名：</th><td>${sessionScope.oneResume.rName}</td></tr>
+            <tr> <th>性　　别：</th><td>${sessionScope.oneResume.rSex} </td></tr>
+            <tr> <th> 联系电话：</th><td> ${sessionScope.oneResume.rPhone}</td></tr>
+            <tr> <th>年　　龄：</th><td>${sessionScope.oneResume.rAge}</td></tr>
+            <tr> <th>学　　历：</th><td>${sessionScope.oneResume.rEducation}</td></tr>
+            <tr> <th> 工作经历：</th><td><textarea  name="rWorkExperience" style="width:200px;height:80px;" required="required">
                     ${sessionScope.oneResume.rWorkExperience}
-            </textarea><br>
-            求职意向：${sessionScope.oneResume.rCareerObjective} <br>
+            </textarea></td></tr>
+            <tr> <th>求职意向：</th><td>${sessionScope.oneResume.rCareerObjective} </td></tr>
+        </table>
         <a href="deleteResumeDd?rdId=${sessionScope.resumeDd.rdId}">删除此简历</a>
         <p id="p1">通知面试</p>
         <div id="div2">

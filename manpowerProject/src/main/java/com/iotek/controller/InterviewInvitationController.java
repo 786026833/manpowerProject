@@ -6,6 +6,7 @@ import com.iotek.model.InterviewInvitation;
 import com.iotek.model.ResumeDd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,9 +37,9 @@ public class InterviewInvitationController {
    }
     @RequestMapping("/selectInterviewInvitation")
     public String selectInterviewInvitation(InterviewInvitation interviewInvitation,
-        int permission, HttpSession session) {
+        int permission, HttpSession session, Model model) {
         if (permission == 2) {
-            session.setAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
+            model.addAttribute("error2","请先登陆，才能获取权限，如果没有账号，请先注册");
             return "../../index";
         } else {
 
@@ -53,7 +54,6 @@ public class InterviewInvitationController {
         for (InterviewInvitation i:interviewInvitations ) {
             if (i.getiId()==iId){
                 i.setiState((long)0);
-                System.out.println(i.toString());
                 iis.updateById(i);
                 List<ResumeDd> resumeDds=resumeDdService.selectAllResumeDd();
                 for (ResumeDd rd:resumeDds) {

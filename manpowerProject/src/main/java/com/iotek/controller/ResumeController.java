@@ -7,8 +7,10 @@ import com.iotek.dao.ResumeMapper;
 import com.iotek.model.Resume;
 import com.iotek.model.ResumeDd;
 import com.iotek.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +32,11 @@ public class ResumeController {
     @Autowired
     private ResumeDdService resumeDdService;
     @RequestMapping("/addResume")
-    public String addResume(Resume resume, HttpServletRequest request, HttpSession session, HttpServletResponse response){
+    public String addResume(Resume resume, Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response){
+        System.out.println(resume.toString());
             if (resumeService.addResume(resume)!=0){
                 session.setAttribute("resume",resumeService.selectResume(resume));
+                model.addAttribute("error","简历填写完成");
                 return "welcome";
             }else{
                 try {

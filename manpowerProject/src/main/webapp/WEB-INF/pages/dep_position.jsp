@@ -31,20 +31,27 @@
 </head>
 <body>
 <div>
-    <table>
-        <tr>
-            <th>职位编号</th>
-            <th>职位名称</th>
-            <th>基本薪资</th>
-        </tr>
-        <c:forEach items="${sessionScope.positions}" var="pos">
-            <tr>
-                <td><a href="pos_employee?pId=${pos.pId}&num=1">${pos.pId}</a></td>
-                <td>${pos.pName}</td>
-                <td>${pos.pSalary}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    <c:choose>
+        <c:when test="${empty sessionScope.positions}">
+            该职位暂时还没有员工
+        </c:when>
+        <c:otherwise>
+            <table>
+                <tr>
+                    <th>职位编号</th>
+                    <th>职位名称</th>
+                    <th>基本薪资</th>
+                </tr>
+                <c:forEach items="${sessionScope.positions}" var="pos">
+                    <tr>
+                        <td><a href="pos_employee?pId=${pos.pId}&num=1">${pos.pId}</a></td>
+                        <td>${pos.pName}</td>
+                        <td>${pos.pSalary}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
     <a href="skipSelectDepartment">返回</a>
 </div>
 </body>

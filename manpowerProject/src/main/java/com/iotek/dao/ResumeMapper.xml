@@ -63,7 +63,7 @@
       <if test="rCareerObjective != null" >
         R_CAREER_OBJECTIVE,
       </if>
-      <if test="user != null" >
+      <if test="uId != null" >
         U_ID,
       </if>
     </trim>
@@ -92,7 +92,7 @@
       <if test="rCareerObjective != null" >
         #{rCareerObjective,jdbcType=VARCHAR},
       </if>
-      <if test="user != null" >
+      <if test="uId != null" >
         #{uId,jdbcType=DECIMAL},
       </if>
     </trim>

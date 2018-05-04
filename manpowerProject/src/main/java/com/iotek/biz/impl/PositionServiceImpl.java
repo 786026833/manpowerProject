@@ -40,4 +40,9 @@ public class PositionServiceImpl implements PositionService{
     public Position selectByID(Position position) {
         return positionMapper.selectByID(position);
     }
+
+    @Override
+    public Position selectByID1(Position position) {
+        return positionMapper.selectByID1(position);
+    }
 }

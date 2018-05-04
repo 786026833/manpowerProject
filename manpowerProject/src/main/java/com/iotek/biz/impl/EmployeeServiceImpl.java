@@ -40,4 +40,14 @@ public class EmployeeServiceImpl  implements EmployeeService {
     public int updateByID1(Employee employee) {
         return employeeMapper.updateByID1(employee);
     }
+
+    @Override
+    public Employee selectByNamePass(Employee employee) {
+        return employeeMapper.selectByNamePass(employee);
+    }
+
+    @Override
+    public Employee selectById(Employee employee) {
+        return employeeMapper.selectById(employee);
+    }
 }

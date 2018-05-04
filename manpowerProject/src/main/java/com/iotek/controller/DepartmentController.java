@@ -3,6 +3,7 @@ package com.iotek.controller;
 import com.iotek.biz.DepartmentService;
 import com.iotek.biz.PositionService;
 import com.iotek.model.Department;
+import com.iotek.model.Employee;
 import com.iotek.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,5 +90,22 @@ public class DepartmentController {
         session.setAttribute("error7","部门修改成功");
         return selectDepartment(session);
     }
-
+    @RequestMapping("/queryAllDepartment")
+    public  String queryAllDepartment(Model model, Employee employee, HttpSession session){
+        List<Department> departments=departmentService.selectAllDepartment();
+        session.setAttribute("departments",departments);
+        model.addAttribute("employee",employee);
+        return "queryAllDepartment";
+    }
+    @RequestMapping("/all_dep_pos")
+    public  String all_dep_pos(Model model, Employee employee,Department department, HttpSession session){
+        List<Department> departments=departmentService.selectAllDepartment();
+        for (Department d:departments) {
+            if (d.getdId()==department.getdId()){
+                session.setAttribute("positions",d.getPositions());
+            }
+        }
+        model.addAttribute("employee",employee);
+        return "all_dep_pos";
+    }
 }

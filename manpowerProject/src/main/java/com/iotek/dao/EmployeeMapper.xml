@@ -22,6 +22,16 @@
     *
     from T_EMPLOYEE
   </select>
+  <select id="selectByNamePass" resultMap="BaseResultMap">
+     select
+    *
+    from T_EMPLOYEE WHERE E_NAME=#{eName} AND E_PASS=#{ePass}
+  </select>
+  <select id="selectById" resultMap="BaseResultMap">
+     select
+    *
+    from T_EMPLOYEE WHERE E_ID=#{eId}
+  </select>
   <delete id="deleteByID" parameterType="Employee" >
     delete from T_EMPLOYEE
     where E_ID = #{eId,jdbcType=DECIMAL}

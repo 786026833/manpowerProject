@@ -17,6 +17,14 @@ public class Employee implements Serializable {
     private Date eJoinDate;
     private Long eTrain;
 
+    public Employee(String eName, String ePass) {
+        this.eName = eName;
+        this.ePass = ePass;
+    }
+
+    public Employee() {
+    }
+
     public Long geteId() {
         return eId;
     }

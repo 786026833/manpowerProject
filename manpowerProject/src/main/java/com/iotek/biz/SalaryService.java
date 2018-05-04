@@ -13,4 +13,5 @@ public interface SalaryService {
     Salary selectByID(Salary salary);
     List<Salary> selectAllSalary();
     int updateByID(Salary salary);
+    List<Salary> selectByEiD(Salary salary);
 }

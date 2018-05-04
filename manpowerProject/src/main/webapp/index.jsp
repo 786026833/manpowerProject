@@ -13,7 +13,7 @@
 <body>
 <div>
     <p>欢迎游客进入人力资源网站</p>
-    <a href="selectInformation?currentPage=1">招聘信息</a><br>
+    <a href="selectInformation?currentPage=1&p=1">招聘信息</a><br>
     <a href="skipResume?permission=2">填写简历</a><br>
     <a href="skipQueryResume?permission=2&resume=0">查看简历</a><br>
     <a href="selectInterviewInvitation?&permission=2">查看面试邀请</a><br>
@@ -22,6 +22,7 @@
         <select name="myselect" id="myselect">
             <option value="opt1">用户</option>
             <option value="opt2">管理员</option>
+            <option value="opt3">员工</option>
         </select>
         <input type="submit" value="登陆"/>
     </form>

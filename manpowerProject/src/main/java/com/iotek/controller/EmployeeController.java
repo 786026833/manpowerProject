@@ -89,4 +89,39 @@ public class EmployeeController {
         }
         return "selectOneEmployee1";
     }
+    @RequestMapping("/skipEmployeeInfo")
+    public String skipEmployeeInfo(Employee employee,Model model, HttpSession session) {
+        employee= employeeService.selectById(employee);
+        model.addAttribute("employee",employee);
+        List<Department> departments=departmentService.selectAllDepartment();
+        for (Department d:departments) {
+            if (d.getdId()==employee.geteDid()){
+                model.addAttribute("department",d);
+                for (Position p:d.getPositions()) {
+                    if (p.getpId()==employee.getePid()){
+                        model.addAttribute("position",p);
+                    }
+                }
+            }
+        }
+        return "employeeInfo";
+    }
+    @RequestMapping("/queryAllemployee3")
+    public String queryAllemployee3( Employee employee,Model model,HttpSession session){
+
+        List<Department> lists=departmentService.selectAllDepartment();
+        model.addAttribute("allDepartments",lists);
+        model.addAttribute("allPositions",positionService.selectAllPosition());
+        model.addAttribute("allEmployees",employeeService.selectAllEmployee());
+        model.addAttribute("employee",employee);
+        return "queryAllemployee3";
+    }
+    @RequestMapping("/updateEmployee1")
+    public String updateEmployee1( Employee employee, Model model, HttpServletRequest request, HttpSession session){
+        employeeService.updateByID(employee);
+        employee=employeeService.selectById(employee);
+        model.addAttribute("employee",employee);
+        model.addAttribute("error","修改成功");
+        return "employeeInfo";
+    }
 }

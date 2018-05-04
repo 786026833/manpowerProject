@@ -10,10 +10,17 @@ public class Position implements Serializable {
 
     private String pName;
 
-    private BigDecimal pSalary;
+    private long pSalary;
 
     private Long dId;
     private Set<Employee> employees=new HashSet<>();
+
+    public Position() {
+    }
+
+    public Position(Long pId) {
+        this.pId = pId;
+    }
 
     public Long getpId() {
         return pId;
@@ -31,11 +38,11 @@ public class Position implements Serializable {
         this.pName = pName == null ? null : pName.trim();
     }
 
-    public BigDecimal getpSalary() {
+    public long getpSalary() {
         return pSalary;
     }
 
-    public void setpSalary(BigDecimal pSalary) {
+    public void setpSalary(long pSalary) {
         this.pSalary = pSalary;
     }
 

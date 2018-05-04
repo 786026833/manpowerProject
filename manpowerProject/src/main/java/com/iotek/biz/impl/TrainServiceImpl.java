@@ -35,4 +35,9 @@ public class TrainServiceImpl implements TrainService {
     public int updateByID(Train train) {
         return trainMapper.updateByID(train);
     }
+
+    @Override
+    public List<Train> selectByeDid(Train train) {
+        return trainMapper.selectByeDid(train);
+    }
 }

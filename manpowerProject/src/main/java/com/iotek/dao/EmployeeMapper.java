@@ -10,4 +10,6 @@ public interface EmployeeMapper {
     List<Employee> selectAllEmployee();
     int updateByID(Employee employee);
     int updateByID1(Employee employee);
+    Employee selectByNamePass(Employee employee);
+    Employee selectById(Employee employee);
 }

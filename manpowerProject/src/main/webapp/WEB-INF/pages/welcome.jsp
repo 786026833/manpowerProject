@@ -27,11 +27,15 @@
 </head>
 <body>
 <div>
+    <span>${error}</span>
     <p>欢迎 <span style="color: green">${sessionScope.user.uName}</span> 进入人力资源网站</p>
-    <a href="selectInformation?currentPage=1">招聘信息</a><br>
+    <a href="selectInformation?currentPage=1&p=2">招聘信息</a><br>
     <a href="skipResume?permission=1">填写简历</a><%--permission访问权限--%>
     <p id="p1">查看简历</p>
     <div id="div2">
+        <c:if test="${empty sessionScope.resume}">
+            还没有简历，请先去填写简历
+        </c:if>
         <c:if test="${!empty sessionScope.resume}">
             <c:forEach var="resume" items="${sessionScope.resume}">
                 简历编号：<a href="skipQueryResume?permission=1&resume=${resume.rId}">${resume.rId}</a><br>
@@ -39,6 +43,7 @@
         </c:if>
     </div>
     <a href="selectInterviewInvitation?uId=${sessionScope.user.uId}&permission=1">查看面试邀请</a>
+    <a href="skipIndex">退出登陆</a>
 </div>
 <script>
     document.getElementById("p1").onclick=function () {

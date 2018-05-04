@@ -10,8 +10,9 @@
 </head>
 <body>
 <div>
+    <span>${rp}</span>
     <a href="skipAddRewardPunishment">添加奖惩信息</a>
-    <a href="">查看奖惩信息</a>
+    <a href="skipAllRewardPunishment">查看奖惩信息</a>
 </div>
 <a href="skipAdministratorPages">返回</a>
 </body>

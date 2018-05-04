@@ -6,26 +6,79 @@
     <result column="C_WORK_TIME" property="cWorkTime" jdbcType="TIMESTAMP" />
     <result column="C_OFFWORK_TINE" property="cOffworkTine" jdbcType="TIMESTAMP" />
     <result column="C_LATE" property="cLate" jdbcType="VARCHAR" />
+    <result column="C_ABSENTEEISM" property="cAbsenteeism" jdbcType="VARCHAR" />
     <result column="C_LEAVE" property="cLeave" jdbcType="VARCHAR" />
     <result column="E_ID" property="eId" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    C_ID, C_WORK_TIME, C_OFFWORK_TINE, C_LATE, C_LEAVE, E_ID
+    C_ID, C_WORK_TIME, C_OFFWORK_TINE, C_LATE, C_LEAVE, E_ID,C_ABSENTEEISM
   </sql>
   <select id="selectAllCheck" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
-    from T_CHECK
+    from T_CHECK ORDER BY E_ID
+  </select>
+  <select id="selectAllCheckByEid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_CHECK WHERE E_ID=#{eId}
+  </select>
+  <select id="select" resultMap="BaseResultMap" >
+          SELECT * FROM T_CHECK
+          WHERE E_ID=#{eId}
   </select>
   <delete id="deleteByID" parameterType="Check" >
     delete from T_CHECK
     where C_ID = #{cId,jdbcType=DECIMAL}
   </delete>
   <insert id="addCheck" parameterType="com.iotek.model.Check" >
-    insert into T_CHECK (C_WORK_TIME, C_OFFWORK_TINE,
-      C_LATE, C_LEAVE, E_ID)
-    values (#{cWorkTime,jdbcType=TIMESTAMP}, #{cOffworkTine,jdbcType=TIMESTAMP},
-      #{cLate,jdbcType=VARCHAR}, #{cLeave,jdbcType=VARCHAR}, #{eId,jdbcType=DECIMAL})
+    insert into T_CHECK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        C_ID,
+      </if>
+      <if test="cWorkTime != null" >
+        C_WORK_TIME,
+      </if>
+      <if test="cOffworkTine != null" >
+        C_OFFWORK_TINE,
+      </if>
+      <if test="cLate != null" >
+        C_LATE,
+      </if>
+      <if test="cLeave != null" >
+        C_LEAVE,
+      </if>
+      <if test="eId != null" >
+        E_ID,
+      </if>
+      <if test="cAbsenteeism != null" >
+        C_ABSENTEEISM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=DECIMAL},
+      </if>
+      <if test="cWorkTime != null" >
+        #{cWorkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cOffworkTine != null" >
+        #{cOffworkTine,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cLate != null" >
+        #{cLate,jdbcType=VARCHAR},
+      </if>
+      <if test="cLeave != null" >
+        #{cLeave,jdbcType=VARCHAR},
+      </if>
+      <if test="eId != null" >
+        #{eId,jdbcType=DECIMAL},
+      </if>
+      <if test="cAbsenteeism != null" >
+        #{cAbsenteeism,jdbcType=VARCHAR},
+      </if>
+    </trim>
   </insert>
 
   <update id="updateByID" parameterType="com.iotek.model.Check" >
@@ -39,6 +92,9 @@
       </if>
       <if test="cLate != null" >
         C_LATE = #{cLate,jdbcType=VARCHAR},
+      </if>
+      <if test="cAbsenteeism != null" >
+        C_ABSENTEEISM = #{cAbsenteeism,jdbcType=VARCHAR},
       </if>
       <if test="cLeave != null" >
         C_LEAVE = #{cLeave,jdbcType=VARCHAR},

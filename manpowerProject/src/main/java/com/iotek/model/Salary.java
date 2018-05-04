@@ -1,23 +1,26 @@
 package com.iotek.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Salary {
     private Long sId;
 
-    private BigDecimal sBaseSal;
+    private double sBaseSal;
 
-    private BigDecimal sPerfSal;
+    private double sPerfSal;
 
-    private Long sOverSal;
+    private double sOverSal;
 
-    private Long sPenaltySal;
+    private double sPenaltySal;
 
-    private Long sSocSal;
+    private double sSocSal;
 
-    private BigDecimal sTotalSal;
+    private double sTotalSal;
 
     private Long eId;
+
+    private Date sMonth;
 
     public Long getsId() {
         return sId;
@@ -27,51 +30,51 @@ public class Salary {
         this.sId = sId;
     }
 
-    public BigDecimal getsBaseSal() {
+    public double getsBaseSal() {
         return sBaseSal;
     }
 
-    public void setsBaseSal(BigDecimal sBaseSal) {
+    public void setsBaseSal(double sBaseSal) {
         this.sBaseSal = sBaseSal;
     }
 
-    public BigDecimal getsPerfSal() {
+    public double getsPerfSal() {
         return sPerfSal;
     }
 
-    public void setsPerfSal(BigDecimal sPerfSal) {
+    public void setsPerfSal(double sPerfSal) {
         this.sPerfSal = sPerfSal;
     }
 
-    public Long getsOverSal() {
+    public double getsOverSal() {
         return sOverSal;
     }
 
-    public void setsOverSal(Long sOverSal) {
+    public void setsOverSal(double sOverSal) {
         this.sOverSal = sOverSal;
     }
 
-    public Long getsPenaltySal() {
+    public double getsPenaltySal() {
         return sPenaltySal;
     }
 
-    public void setsPenaltySal(Long sPenaltySal) {
+    public void setsPenaltySal(double sPenaltySal) {
         this.sPenaltySal = sPenaltySal;
     }
 
-    public Long getsSocSal() {
+    public double getsSocSal() {
         return sSocSal;
     }
 
-    public void setsSocSal(Long sSocSal) {
+    public void setsSocSal(double sSocSal) {
         this.sSocSal = sSocSal;
     }
 
-    public BigDecimal getsTotalSal() {
+    public double getsTotalSal() {
         return sTotalSal;
     }
 
-    public void setsTotalSal(BigDecimal sTotalSal) {
+    public void setsTotalSal(double sTotalSal) {
         this.sTotalSal = sTotalSal;
     }
 
@@ -81,5 +84,28 @@ public class Salary {
 
     public void seteId(Long eId) {
         this.eId = eId;
+    }
+
+    public Date getsMonth() {
+        return sMonth;
+    }
+
+    public void setsMonth(Date sMonth) {
+        this.sMonth = sMonth;
+    }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "sId=" + sId +
+                ", sBaseSal=" + sBaseSal +
+                ", sPerfSal=" + sPerfSal +
+                ", sOverSal=" + sOverSal +
+                ", sPenaltySal=" + sPenaltySal +
+                ", sSocSal=" + sSocSal +
+                ", sTotalSal=" + sTotalSal +
+                ", eId=" + eId +
+                ", sMonth=" + sMonth +
+                '}';
     }
 }

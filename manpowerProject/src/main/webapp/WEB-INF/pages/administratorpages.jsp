@@ -21,11 +21,12 @@
       <a href="skipDepartment">部门管理</a><br>
       <a href="addD_Position">职位管理</a><br>
       <a href="skipAdm_empl">员工管理</a><br>
-      <a href="">薪资管理</a><br>
-      <a href="">考勤管理</a><br>
+      <a href="skipSalary">薪资管理</a><br>
+      <a href="skipSelectCheck">考勤管理</a><br>
       <a href="skipTrain">培训管理</a><br>
       <a href="skipRecruit">招聘管理</a><br>
       <a href="skipRewardPunishment">奖惩信息管理</a><br>
   </div>
+  <a href="skipIndex">退出登录</a>
 </body>
 </html>

@@ -10,7 +10,7 @@ public class ResumeDd implements Serializable{
     private Long rId;
     private Date rdTime;
     private String rdState;
-   private  String rdInterview;
+    private  String rdInterview;
     public ResumeDd() {
     }
 
@@ -65,4 +65,5 @@ public class ResumeDd implements Serializable{
     public void setRdInterview(String rdInterview) {
         this.rdInterview = rdInterview;
     }
+
 }
